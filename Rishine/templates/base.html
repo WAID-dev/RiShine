@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Rishine{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/global.css">
+</head>
+<body>
+    <header>
+        <nav class="container nav">
+            <a href="{% url 'inicio:home' %}">Inicio</a>
+            <a href="{% url 'explorar:index' %}">Explorar</a>
+            <a href="{% url 'eventos:index' %}">Eventos</a>
+            <a href="{% url 'usuarios:index' %}">Usuarios</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
