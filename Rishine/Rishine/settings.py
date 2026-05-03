@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'usuarios',
     'explorar',
     'inicio',
-    'eventos',
+    'crear_evento',
+    'ver_evento',
     
     'django.contrib.admin',
     'django.contrib.auth',
