@@ -1,0 +1,139 @@
+<style>
+        :root {
+            --soft-linen:      #EFEDE3;
+            --lavender-blush:  #DBD0D9;
+            --midnight-violet: #381932;
+            --graphite:        #302F2C;
+            --black:           #000000;
+            --accent:          #5C2D6E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: var(--midnight-violet);
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            height: 60px;
+            gap: 8px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+        }
+
+        nav .logo {
+            font-family: 'Playfair Display', serif;
+            color: var(--soft-linen);
+            font-size: 22px;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 1px;
+            margin-right: auto;
+        }
+
+        .nav-buscar {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255,255,255,0.1);
+            border: 1px solid rgba(219,208,217,0.3);
+            border-radius: 20px;
+            padding: 6px 14px;
+            gap: 8px;
+            margin-right: 8px;
+        }
+
+        .nav-buscar input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--soft-linen);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            width: 160px;
+        }
+
+        .nav-buscar input::placeholder {
+            color: rgba(239,237,227,0.5);
+        }
+
+        .nav-buscar svg {
+            width: 16px;
+            height: 16px;
+            stroke: rgba(239,237,227,0.6);
+            flex-shrink: 0;
+        }
+
+        nav a.nav-link {
+            color: var(--lavender-blush);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background 0.2s, color 0.2s;
+            white-space: nowrap;
+        }
+
+        nav a.nav-link:hover {
+            background-color: rgba(255,255,255,0.12);
+            color: var(--soft-linen);
+        }
+
+        nav a.nav-link.activo {
+            background-color: var(--soft-linen);
+            color: var(--midnight-violet);
+        }
+
+        .nav-perfil {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--lavender-blush);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: opacity 0.2s;
+        }
+
+        .nav-perfil:hover {
+            opacity: 0.85;
+        }
+
+        .nav-perfil svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--midnight-violet);
+        }
+
+    </style>
+
+<nav>
+        <a class="logo" href="{% url 'inicio:index' %}">RISHINE</a>
+
+        <div class="nav-buscar">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" placeholder="Buscar eventos...">
+        </div>
+
+        <a href="{% url 'inicio:index' %}" class="nav-link">Inicio</a>
+        <a href="{% url 'crear_evento:index' %}" class="nav-link">Crear Evento</a>
+
+        <div class="nav-perfil" title="Perfil de usuario">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+            </svg>
+        </div>
+    </nav>

@@ -1,5 +1,11 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def index(request):
-    return HttpResponse(status=204)
+    return render(request, 'crear_evento/formulario_crear_evento.html')
+
+
+
+
+
+

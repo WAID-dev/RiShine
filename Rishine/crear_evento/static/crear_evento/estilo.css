@@ -1,0 +1,21 @@
+h1 {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+h2 {
+    font-family: sans-serif;
+}
+
+form {
+    background: rgb(236, 147, 233);
+    padding: 50px;
+    border-radius: 5%;
+}
+
+#descripcion {
+    width: 500px;
+    height: 100px;
+    padding-top: 0;
+
+}

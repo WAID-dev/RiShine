@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesion</title>
+</head>
+<body>
+    <h1>Iniciar sesion</h1>
+
+    <form method="post" action="{% url 'cuentas:login' %}">
+        {% csrf_token %}
+        <p>
+            <label for="username">Nombre de usuario</label>
+            <input type="text" id="username" name="username" required>
+        </p>
+        <p>
+            <label for="password">Contrasenia</label>
+            <input type="password" id="password" name="password" required>
+        </p>
+        <button type="submit">INICIAR SESION</button>
+    </form>
+
+</body>
+</html>

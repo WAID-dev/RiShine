@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <style>
+            .flex-container {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 30px;
+                flex-wrap: wrap;
+            }
+
+            .contenedor{
+                max-width: 400px;
+                flex: 1;
+                margin: 1;
+                padding: 30px;
+                border-radius: 20px;
+                background: rgba(110, 7, 255, 0.428);
+            }
+
+            .campo {
+            display: flex; /* Hace que los hijos pongan unos al lado del otro*/
+            align-items: center;       /* centra verticalmente */
+            gap: 10px;                 /* espacio entre label e input */
+            margin-bottom: 15px;       /* separación entre campos */
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <div style="text-align: center; font-size: 25px;">
+            <h1>Bienvendido a RiShine</h1>
+        </div>
+
+            <div class="flex-container">
+
+                <div class="contenedor">
+
+                    <h1>Registrarse</h1>
+
+                    <form method="post" action="{% url 'cuentas:registro' %}">
+                    {% csrf_token %}
+
+                    <div class="campo">
+                        <label for="nombre">Nombres</label>
+                        <input type="text" id="nombre" name="first_name">
+                    </div>
+
+                    <div class="campo">
+                        <label for="apellido">Apellidos</label>
+                        <input type="text" id="apellido" name="last_name">
+                    </div>
+
+                    <div class="campo">
+                        <label for="username">Nombre de usuario</label>
+                        <input type="text" id="username" name="username">
+                    </div>
+
+                    <div class="campo">
+                        <label for="correo">Correo electronico</label>
+                        <input type="text" id="correo" name="email">
+                    </div>
+
+                    <div class="campo">
+                        <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+                    </div>
+
+                    <div class="campo">
+                        <label for="ciudad">Ciudad</label>
+                        <input type="text" id="ciudad" name="ciudad">
+                    </div>
+
+                    <div class="campo">
+                        <label for="password1">Contrasenya</label>
+                        <input type="password" id="password1" name="password1">
+                    </div>
+
+                    <div class="campo">
+                        <label for="password2">Confirmar contrasenya</label>
+                        <input type="password" id="password2" name="password2">
+                    </div>
+
+                    <div aling="left">
+                        <button type="submit">CREAR CUENTA</button>
+                    </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+    </body>
+</html>

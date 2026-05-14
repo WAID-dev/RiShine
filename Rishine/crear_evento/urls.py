@@ -6,4 +6,6 @@ app_name = 'crear_evento'
 
 urlpatterns = [
     path('', views.index, name='index'),
+
+
 ]

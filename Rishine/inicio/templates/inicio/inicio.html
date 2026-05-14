@@ -1,0 +1,327 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<style>
+    /* ══ BIENVENIDO ══ */
+    .bienvenido {
+        text-align: center;
+        padding: 40px 0 32px;
+    }
+
+    .bienvenido h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 42px;
+        color: #381932;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+    }
+
+    .bienvenido p {
+        color: #5C4D6A;
+        font-size: 15px;
+    }
+
+    /* ══ SECCIÓN DE CATEGORÍAS ══ */
+    .seccion {
+        margin-bottom: 40px;
+    }
+
+    .seccion-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+    }
+
+    .seccion-header h2 {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #302F2C;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+
+    .seccion-header a {
+        font-size: 13px;
+        color: #381932;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 500;
+        transition: opacity 0.2s;
+    }
+
+    .seccion-header a:hover {
+        opacity: 0.7;
+    }
+
+    .seccion-header a::after {
+        content: '→';
+    }
+
+    /* ══ GRILLA DE EVENTOS ══ */
+    .eventos-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 14px;
+    }
+
+    .evento-card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid rgba(219,208,217,0.6);
+        transition: transform 0.2s, box-shadow 0.2s;
+        cursor: pointer;
+        text-decoration: none;
+        display: block;
+        color: inherit;
+    }
+
+    .evento-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(56,25,50,0.12);
+    }
+
+    .evento-imagen {
+        width: 100%;
+        aspect-ratio: 4/3;
+        background: linear-gradient(135deg, #DBD0D9 0%, #c4b4c2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .evento-imagen svg {
+        width: 32px;
+        height: 32px;
+        stroke: rgba(56,25,50,0.3);
+    }
+
+    .evento-tipo {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        background-color: #381932;
+        color: #EFEDE3;
+        font-size: 10px;
+        font-weight: 500;
+        padding: 3px 8px;
+        border-radius: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .evento-info {
+        padding: 10px 12px 12px;
+    }
+
+    .evento-nombre {
+        font-weight: 500;
+        font-size: 13px;
+        color: #302F2C;
+        margin-bottom: 3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .evento-ubicacion {
+        font-size: 11px;
+        color: #888;
+        margin-bottom: 6px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .evento-precio {
+        font-size: 13px;
+        font-weight: 500;
+        color: #381932;
+    }
+
+    /* ══ BANNER CTA ══ */
+    .banner-cta {
+        background-color: #381932;
+        border-radius: 12px;
+        padding: 28px 36px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 12px;
+        margin-bottom: 8px;
+    }
+
+    .banner-cta p {
+        color: var(--lavender-blush);
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+    }
+
+    .banner-cta p span {
+        color: var(--soft-linen);
+        font-family: 'Playfair Display', serif;
+        font-size: 17px;
+    }
+
+    .btn-crear {
+        background-color: var(--soft-linen);
+        color: var(--midnight-violet);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 10px 24px;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: opacity 0.2s;
+        white-space: nowrap;
+    }
+
+    .btn-crear:hover {
+        opacity: 0.85;
+    }
+
+    /* ══ COLORES DE IMAGEN POR CATEGORÍA ══ */
+    .color-para-ti    { background: linear-gradient(135deg, #DBD0D9 0%, #c4b4c2 100%); }
+    .color-gratuita   { background: linear-gradient(135deg, #d4e8d4 0%, #b5d4b5 100%); }
+    .color-200        { background: linear-gradient(135deg, #dbd4c4 0%, #c4b8a0 100%); }
+    .color-500        { background: linear-gradient(135deg, #d4c4db 0%, #b8a0c8 100%); }
+
+    @media (max-width: 900px) {
+        .eventos-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .eventos-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .bienvenido h1 {
+            font-size: 28px;
+        }
+    }
+</style>
+
+<!-- Bienvenido -->
+<div class="bienvenido">
+    <h1>BIENVENIDO</h1>
+    <p>Descubre eventos cerca de ti</p>
+</div>
+
+<!-- Sección: Para Ti -->
+<div class="seccion">
+    <div class="seccion-header">
+        <h2>Para Ti</h2>
+        <a href="#">Ver todos</a>
+    </div>
+    <div class="eventos-grid">
+        {% for i in "12345" %}
+        <a href="#" class="evento-card">
+            <div class="evento-imagen color-para-ti">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span class="evento-tipo">Evento</span>
+            </div>
+            <div class="evento-info">
+                <div class="evento-nombre">Nombre del Evento</div>
+                <div class="evento-ubicacion">Nombre Ubicación</div>
+                <div class="evento-precio">$ Precio</div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Sección: Entrada Gratuita -->
+<div class="seccion">
+    <div class="seccion-header">
+        <h2>Entrada Gratuita</h2>
+        <a href="#">Ver todos</a>
+    </div>
+    <div class="eventos-grid">
+        {% for i in "12345" %}
+        <a href="#" class="evento-card">
+            <div class="evento-imagen color-gratuita">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span class="evento-tipo">Gratis</span>
+            </div>
+            <div class="evento-info">
+                <div class="evento-nombre">Nombre del Evento</div>
+                <div class="evento-ubicacion">Nombre Ubicación</div>
+                <div class="evento-precio">$ Gratis</div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Sección: En menos de $200 -->
+<div class="seccion">
+    <div class="seccion-header">
+        <h2>En Menos de $200</h2>
+        <a href="#">Ver todos</a>
+    </div>
+    <div class="eventos-grid">
+        {% for i in "12345" %}
+        <a href="#" class="evento-card">
+            <div class="evento-imagen color-200">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span class="evento-tipo">Evento</span>
+            </div>
+            <div class="evento-info">
+                <div class="evento-nombre">Nombre del Evento</div>
+                <div class="evento-ubicacion">Nombre Ubicación</div>
+                <div class="evento-precio">$ Precio</div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Sección: En menos de $500 -->
+<div class="seccion">
+    <div class="seccion-header">
+        <h2>En Menos de $500</h2>
+        <a href="#">Ver todos</a>
+    </div>
+    <div class="eventos-grid">
+        {% for i in "12345" %}
+        <a href="#" class="evento-card">
+            <div class="evento-imagen color-500">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span class="evento-tipo">Evento</span>
+            </div>
+            <div class="evento-info">
+                <div class="evento-nombre">Nombre del Evento</div>
+                <div class="evento-ubicacion">Nombre Ubicación</div>
+                <div class="evento-precio">$ Precio</div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Banner CTA -->
+<div class="banner-cta">
+    <p><span>¿Quieres crear tus propios eventos?</span></p>
+    <a href="{% url 'crear_evento:index' %}" class="btn-crear">Crear Evento</a>
+</div>
+
+{% endblock %}
