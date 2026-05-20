@@ -1,4 +1,6 @@
 from django.db import models
+from pathlib import Path
+from uuid import uuid4
 
 class Categoria(models.Model):
     """Se utiliza para clasificar eventos,
@@ -24,6 +26,12 @@ ESTATUS_CHOICES = [
     (ESTATUS_PUBLICADO, 'Publicado'),
 ]
 
+def ruta_imagen_evento(instance, filename):
+    extension = Path(filename).suffix.lower() or '.jpg'
+    promotor_id = getattr(instance, 'promotor_id', None) or 'sin_promotor'
+    nombre_archivo = f"{uuid4().hex}{extension}"
+    return f"imagen_evento/promotor_{promotor_id}/{nombre_archivo}"
+
 class Evento(models.Model):
     id_evento = models.AutoField(primary_key=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT, related_name='evento_categoria')
@@ -38,7 +46,7 @@ class Evento(models.Model):
     fecha_fin = models.DateField()
     horario = models.ManyToManyField(Horario, related_name='evento_horario')
     estatus = models.CharField(max_length=10, choices=ESTATUS_CHOICES, default=ESTATUS_BORRADOR)
-    imagen = models.ImageField(upload_to='evento_imagens', blank=True, null=True)
+    imagen = models.ImageField(upload_to=ruta_imagen_evento, blank=True, null=True)
 
     class Meta:
         constraints = [
@@ -49,7 +57,6 @@ class Evento(models.Model):
 
     def __str__(self):
         return str(self.titulo)
-
 
 
 

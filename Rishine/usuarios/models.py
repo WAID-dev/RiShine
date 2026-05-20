@@ -26,6 +26,7 @@ class Promotor(models.Model):
         related_name='promotor'
     )
     organizacion = models.CharField(max_length=50)
+    telefono = models.CharField(max_length=12)
 
     def __str__(self):
         return f"Promotor<{self.usuario_id}>"

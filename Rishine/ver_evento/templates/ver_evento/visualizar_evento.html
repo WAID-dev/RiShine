@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{% if evento %}{{ evento.titulo }}{% else %}Ver evento{% endif %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'estilos_visualizar_evento.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<main>
+  <div id="event-img">
+    {% if evento and evento.imagen %}
+    <img src="{{ evento.imagen.url }}" alt="{{ evento.titulo }}" style="max-width: 100%; border-radius: 10px;">
+    {% endif %}
+  </div>
+  <div>
+    <h1>{% if evento %}{{ evento.titulo }}{% else %}[Titulo evento]{% endif %}</h1>
+    <h4>Ubicacion:</h4>
+    <p>{% if evento %}{{ evento.direccion }}{% else %}[Calle][No. ext.][No. int.][Colonia][Municipio][Estado]{% endif %}</p>
+    <h4>Fecha:</h4>
+    <p>{% if evento %}{{ evento.fecha_inicio }}{% else %}[Fecha evento]{% endif %}</p>
+    <h4>Horario:</h4>
+    <p>[Hora inicio]-[Hora final]</p>
+    <button>Reportar</button>
+    <button>Guardar</button>
+    <button>Inscribirse</button>
+    <br>
+    <hr>
+    <br>
+    <h4>Categoria:</h4>
+    <p>{% if evento %}{{ evento.categoria.nombre_categoria }}{% else %}[Nombre categoria]{% endif %}</p>
+    <h4>Organizador(es):</h4>
+    <ul>
+      <li>[Organizador 1]</li>
+      <li>[Organizador 2]</li>
+      <li>[Organizador 3]</li>
+    </ul>
+    <h4>Descripcion:</h4>
+    <p>
+      {% if evento %}{{ evento.descripcion }}{% else %}
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum nihil
+      corrupti, illum iste nemo nam libero ex accusamus quam est corporis
+      ullam harum illo! Laborum, vero! Omnis accusantium nemo aspernatur!
+      {% endif %}
+    </p>
+  </div>
+</main>
+{% endblock %}

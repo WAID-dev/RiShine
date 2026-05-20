@@ -210,6 +210,80 @@
             font-size: 28px;
         }
     }
+
+    .login-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(34, 18, 32, 0.35);
+        backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        padding: 1rem;
+    }
+
+    .login-panel {
+        width: min(100%, 460px);
+        border-radius: 20px;
+        background: rgba(110, 7, 255, 0.428);
+        padding: 30px;
+    }
+
+    .login-panel h2 {
+        margin-bottom: 18px;
+    }
+
+    .login-campo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .login-campo label {
+        width: 160px;
+    }
+
+    .login-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 8px;
+    }
+
+    .login-actions button {
+        border-radius: 8px;
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+    .btn-link {
+        display: inline-block;
+        text-decoration: none;
+        background: #fff;
+        color: #302f2c;
+        border-radius: 8px;
+        padding: 8px 12px;
+    }
+
+    .registro-panel {
+        width: min(100%, 560px);
+        border-radius: 20px;
+        background: rgba(110, 7, 255, 0.428);
+        padding: 30px;
+    }
+
+    .registro-campo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+
+    .registro-campo label {
+        width: 180px;
+    }
 </style>
 
 <!-- Bienvenido -->
@@ -225,8 +299,8 @@
         <a href="#">Ver todos</a>
     </div>
     <div class="eventos-grid">
-        {% for i in "12345" %}
-        <a href="#" class="evento-card">
+        {% for evento in eventos %}
+        <a href="{% url 'ver_evento:detalle' evento.id_evento %}" class="evento-card">
             <div class="evento-imagen color-para-ti">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
@@ -234,9 +308,9 @@
                 <span class="evento-tipo">Evento</span>
             </div>
             <div class="evento-info">
-                <div class="evento-nombre">Nombre del Evento</div>
-                <div class="evento-ubicacion">Nombre Ubicación</div>
-                <div class="evento-precio">$ Precio</div>
+                <div class="evento-nombre">{{ evento.titulo }}</div>
+                <div class="evento-ubicacion">{{ evento.direccion }}</div>
+                <div class="evento-precio">$ {{ evento.costo }}</div>
             </div>
         </a>
         {% endfor %}
@@ -250,8 +324,8 @@
         <a href="#">Ver todos</a>
     </div>
     <div class="eventos-grid">
-        {% for i in "12345" %}
-        <a href="#" class="evento-card">
+        {% for evento in eventos %}
+        <a href="{% url 'ver_evento:detalle' evento.id_evento %}" class="evento-card">
             <div class="evento-imagen color-gratuita">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
@@ -259,8 +333,8 @@
                 <span class="evento-tipo">Gratis</span>
             </div>
             <div class="evento-info">
-                <div class="evento-nombre">Nombre del Evento</div>
-                <div class="evento-ubicacion">Nombre Ubicación</div>
+                <div class="evento-nombre">{{ evento.titulo }}</div>
+                <div class="evento-ubicacion">{{ evento.direccion }}</div>
                 <div class="evento-precio">$ Gratis</div>
             </div>
         </a>
@@ -275,8 +349,8 @@
         <a href="#">Ver todos</a>
     </div>
     <div class="eventos-grid">
-        {% for i in "12345" %}
-        <a href="#" class="evento-card">
+        {% for evento in eventos %}
+        <a href="{% url 'ver_evento:detalle' evento.id_evento %}" class="evento-card">
             <div class="evento-imagen color-200">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
@@ -284,9 +358,9 @@
                 <span class="evento-tipo">Evento</span>
             </div>
             <div class="evento-info">
-                <div class="evento-nombre">Nombre del Evento</div>
-                <div class="evento-ubicacion">Nombre Ubicación</div>
-                <div class="evento-precio">$ Precio</div>
+                <div class="evento-nombre">{{ evento.titulo }}</div>
+                <div class="evento-ubicacion">{{ evento.direccion }}</div>
+                <div class="evento-precio">$ {{ evento.costo }}</div>
             </div>
         </a>
         {% endfor %}
@@ -300,8 +374,8 @@
         <a href="#">Ver todos</a>
     </div>
     <div class="eventos-grid">
-        {% for i in "12345" %}
-        <a href="#" class="evento-card">
+        {% for evento in eventos %}
+        <a href="{% url 'ver_evento:detalle' evento.id_evento %}" class="evento-card">
             <div class="evento-imagen color-500">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
@@ -309,9 +383,9 @@
                 <span class="evento-tipo">Evento</span>
             </div>
             <div class="evento-info">
-                <div class="evento-nombre">Nombre del Evento</div>
-                <div class="evento-ubicacion">Nombre Ubicación</div>
-                <div class="evento-precio">$ Precio</div>
+                <div class="evento-nombre">{{ evento.titulo }}</div>
+                <div class="evento-ubicacion">{{ evento.direccion }}</div>
+                <div class="evento-precio">$ {{ evento.costo }}</div>
             </div>
         </a>
         {% endfor %}
@@ -321,7 +395,113 @@
 <!-- Banner CTA -->
 <div class="banner-cta">
     <p><span>¿Quieres crear tus propios eventos?</span></p>
+    {% if request.user.is_authenticated %}
     <a href="{% url 'crear_evento:index' %}" class="btn-crear">Crear Evento</a>
+    {% else %}
+    <a href="{% url 'inicio:index' %}?show_login=1&next={% url 'crear_evento:index' %}" class="btn-crear">Crear Evento</a>
+    {% endif %}
 </div>
+
+{% if not request.user.is_authenticated and request.GET.show_login == '1' %}
+<div class="login-overlay">
+    <div class="login-panel">
+        <h2>Iniciar sesion</h2>
+        <form method="post" action="{% url 'cuentas:login' %}">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.GET.next|default:'/' }}">
+            <div class="login-campo">
+                <label for="username">Nombre de usuario</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="login-campo">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="login-actions">
+                <button type="submit">INICIAR SESION</button>
+                <a class="btn-link" href="{% url 'inicio:index' %}">Cancelar</a>
+                <a class="btn-link" href="{% url 'inicio:index' %}?show_register=1">Registrarse</a>
+            </div>
+        </form>
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+
+{% if not request.user.is_authenticated and request.GET.show_register == '1' %}
+<div class="login-overlay">
+    <div class="registro-panel">
+        <h2>Registrarse</h2>
+        <form method="post" action="{% url 'cuentas:registro' %}">
+            {% csrf_token %}
+            <div class="registro-campo">
+                <label for="reg_first_name">Nombres</label>
+                <input type="text" id="reg_first_name" name="first_name" required>
+            </div>
+            <div class="registro-campo">
+                <label for="reg_last_name">Apellidos</label>
+                <input type="text" id="reg_last_name" name="last_name" required>
+            </div>
+            <div class="registro-campo">
+                <label for="reg_username">Nombre de usuario</label>
+                <input type="text" id="reg_username" name="username" required>
+            </div>
+            <div class="registro-campo">
+                <label for="reg_email">Correo electronico</label>
+                <input type="email" id="reg_email" name="email" required>
+            </div>
+            <div class="registro-campo">
+                <label for="reg_fecha_nacimiento">Fecha de nacimiento</label>
+                <input type="date" id="reg_fecha_nacimiento" name="fecha_nacimiento" required>
+            </div>
+            <div class="registro-campo">
+                <label for="reg_ciudad">Ciudad</label>
+                <input type="text" id="reg_ciudad" name="ciudad" required>
+            </div>
+            <div class="registro-campo">
+                <label for="reg_password1">Contraseña</label>
+                <input type="password" id="reg_password1" name="password1" required>
+            </div>
+            <div class="registro-campo">
+                <label for="reg_password2">Confirmar contraseña</label>
+                <input type="password" id="reg_password2" name="password2" required>
+            </div>
+            <div class="login-actions">
+                <button type="submit">CREAR CUENTA</button>
+                <a class="btn-link" href="{% url 'inicio:index' %}">Cancelar</a>
+                <a class="btn-link" href="{% url 'inicio:index' %}?show_login=1">Iniciar sesion</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+{% if request.user.is_authenticated and request.GET.show_promotor == '1' %}
+<div class="login-overlay">
+    <div class="registro-panel">
+        <h2>Cuenta de promotor</h2>
+        <form method="post" action="{% url 'cuentas:promotor' %}">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.GET.next|default:'/' }}">
+            <div class="registro-campo">
+                <label for="promotor_organizacion">Organizacion</label>
+                <input type="text" id="promotor_organizacion" name="organizacion" required>
+            </div>
+            <div class="registro-campo">
+                <label for="promotor_telefono">Telefono</label>
+                <input type="text" id="promotor_telefono" name="telefono" maxlength="12" required>
+            </div>
+            <div class="login-actions">
+                <button type="submit">CREAR CUENTA PROMOTOR</button>
+                <a class="btn-link" href="{% url 'inicio:index' %}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endif %}
 
 {% endblock %}
