@@ -69,7 +69,7 @@
         gap: 14px;
     }
 
-    .evento-card {
+    . evento-card {
         background-color: #ffffff;
         border-radius: 10px;
         overflow: hidden;
@@ -299,12 +299,16 @@
         <a href="#">Ver todos</a>
     </div>
     <div class="eventos-grid">
-        {% for evento in eventos %}
+        {% for evento in eventos_para_ti %}
         <a href="{% url 'ver_evento:detalle' evento.id_evento %}" class="evento-card">
             <div class="evento-imagen color-para-ti">
+                {% if evento.imagen %}
+                <img src="{{ evento.imagen.url }}" alt="{{ evento.titulo }}" style="width: 100%; height: 100%; object-fit: cover;">
+                {% else %}
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
+                {% endif %}
                 <span class="evento-tipo">Evento</span>
             </div>
             <div class="evento-info">
@@ -324,12 +328,16 @@
         <a href="#">Ver todos</a>
     </div>
     <div class="eventos-grid">
-        {% for evento in eventos %}
+        {% for evento in eventos_gratis %}
         <a href="{% url 'ver_evento:detalle' evento.id_evento %}" class="evento-card">
             <div class="evento-imagen color-gratuita">
+                {% if evento.imagen %}
+                <img src="{{ evento.imagen.url }}" alt="{{ evento.titulo }}" style="width: 100%; height: 100%; object-fit: cover;">
+                {% else %}
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
+                {% endif %}
                 <span class="evento-tipo">Gratis</span>
             </div>
             <div class="evento-info">
@@ -349,12 +357,16 @@
         <a href="#">Ver todos</a>
     </div>
     <div class="eventos-grid">
-        {% for evento in eventos %}
+        {% for evento in eventos_200 %}
         <a href="{% url 'ver_evento:detalle' evento.id_evento %}" class="evento-card">
             <div class="evento-imagen color-200">
+                {% if evento.imagen %}
+                <img src="{{ evento.imagen.url }}" alt="{{ evento.titulo }}" style="width: 100%; height: 100%; object-fit: cover;">
+                {% else %}
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
+                {% endif %}
                 <span class="evento-tipo">Evento</span>
             </div>
             <div class="evento-info">
@@ -374,12 +386,16 @@
         <a href="#">Ver todos</a>
     </div>
     <div class="eventos-grid">
-        {% for evento in eventos %}
+        {% for evento in eventos_500 %}
         <a href="{% url 'ver_evento:detalle' evento.id_evento %}" class="evento-card">
             <div class="evento-imagen color-500">
+                {% if evento.imagen %}
+                <img src="{{ evento.imagen.url }}" alt="{{ evento.titulo }}" style="width: 100%; height: 100%; object-fit: cover;">
+                {% else %}
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
+                {% endif %}
                 <span class="evento-tipo">Evento</span>
             </div>
             <div class="evento-info">

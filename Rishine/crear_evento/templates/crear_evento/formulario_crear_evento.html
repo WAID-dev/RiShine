@@ -8,58 +8,70 @@
 {% endblock %}
 
 {% block contenido %}
+    {% if messages %}
+        {% for message in messages %}
+            <script>alert("{{ message }}");</script>
+        {% endfor %}
+    {% endif %}
+
     <h1>Crear evento</h1>
     <main>
       <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+
         <h2>Información básica</h2>
         <br>
         <p>Imagen del evento:</p>
         <input type="file" name="imagen">
+
         <p>Nombre del evento*:</p>
         <input type="text" name="titulo" required>
-        <p>Organizador(es)*:</p>
-        <input type="text" name="organizador" placeholder="Nombre del organizador" required>
-        <button type="button">Añadir organizador</button>
+
         <p>Categoría*:</p>
-        <select name="categoria">
-          <option>Educación</option>
-          <option>Robotica</option>
-          <option>Juegos</option>
-          <option>Historia</option>
+        <select name="categoria" class="input-campo" required>
+          {% for cat in categorias %}
+            <option value="{{ cat.id_categoria }}">{{ cat.nombre_categoria }}</option>
+          {% endfor %}
         </select>
-        <p>Descripción:</p>
-        <input id="descripcion" name="descripcion" type="text" placeholder="Ingrese una breve descripción">
+
+        <p>Descripción*:</p>
+        <textarea name="descripcion" class="input-campo" placeholder="Ingrese una breve descripción" required></textarea>
+
+        <p>Cupo*:</p>
+        <input type="number" name="cupo" min="0" required>
+
+        <p>Costo*:</p>
+        <input type="number" name="costo" min="0" required>
 
         <h2>Información de la dirección</h2>
         <br>
-        <p>Calle*:</p>
-        <input type="text" name="calle" required>
-        <p>No. interior*:</p>
-        <input type="text" name="numero_interior" required>
-        <p>No. exterior:</p>
-        <input type="text" name="numero_exterior">
-        <p>Colonia*:</p>
-        <input type="text" name="colonia" required>
-        <p>Municipio*:</p>
-        <input type="text" name="municipio" required>
-        <p>Estado*:</p>
-        <input type="text" name="estado" required>
-        <p>Nombre del inmueble:</p>
-        <input type="text" name="nombre_inmueble">
-        <h2>Información de horario</h2>
+        <p>Dirección*:</p>
+        <input type="text" name="direccion" class="input-campo" placeholder="Ej: Av. Vallarta 1234, Col. Americana, Guadalajara" required>
+
+        <p>Referencias:</p>
+        <textarea name="referencias" class="input-campo" placeholder="Ej: Frente al parque, edificio azul"></textarea>
+
+        <h2>Información de fechas</h2>
         <br>
-        <p>Hora de inicio*:</p>
-        <input type="text" name="hora_inicio" required>
-        <p>Hora de final*:</p>
-        <input type="text" name="hora_fin" required>
-        <p>Fecha*:</p>
-        <input type="date" name="fecha" required>
-        <button type="button">Añadir fecha</button>
-        <br>
-        <button type="button">Cancelar</button>
-        <button type="submit" name="accion" value="borrador">Guardar borrador</button>
+        <p>Fecha de inicio*:</p>
+        <input type="date" name="fecha_inicio" required>
+
+        <p>Fecha de fin*:</p>
+        <input type="date" name="fecha_fin" required>
+
+          <h2>Dias del evento</h2>
+          <br>
+          {% for horario in horarios %}
+          <div>
+              <input type="checkbox" id="horario_{{ horario.id_horario }}"
+                name="horarios" value="{{ horario.id_horario }}">
+              <label for="horario_{{ horario.id_horario }}">{{ horario.dia }}</label>
+          </div>
+          {% endfor %}
+        <br><br>
         <button type="submit" name="accion" value="publicado">Publicar evento</button>
+          <button type="submit" name="accion" value="borrador">Guardar borrador</button>
+        <a href="{% url 'inicio:index' %}">Cancelar</a>
       </form>
     </main>
     <footer>

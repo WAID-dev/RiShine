@@ -8,14 +8,26 @@ h2 {
 }
 
 form {
-    background: rgb(236, 147, 233);
+    background: #887694;
     padding: 50px;
     border-radius: 5%;
 }
 
+/*
 #descripcion {
     width: 500px;
     height: 100px;
     padding-top: 0;
 
+}*/
+
+.input-campo {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
 }
+
+

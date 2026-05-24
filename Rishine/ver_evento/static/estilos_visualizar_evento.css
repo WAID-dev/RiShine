@@ -2,22 +2,35 @@ h1 {
   font-family: sans-serif;
 }
 
-#event-img {
-  width: 100%;
-  height: 350px;
-  margin: 0;
-  background: url(imagen_ph.jpg) center / contain fixed no-repeat #000;
-}
-
 h4 {
   font-family: sans-serif;
 }
 
-img {
-  width: 50%;
-  display: inline-block;
+#event-img {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-div {
-  display: inline-block;
+#event-img img {
+  width: 50%;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto;
+}
+
+.btn-accion {
+  padding: 10px 24px;
+  font-size: 15px;
+  border-radius: 20px;
+  border: 1px solid #887694;
+  background: #887694;
+  color: white;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-right: 10px;
+}
+
+.btn-accion:hover {
+  opacity: 0.85;
 }

@@ -4,13 +4,45 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.utils.http import url_has_allowed_host_and_scheme
+from django.contrib.auth.models import User
 
 from usuarios.models import Promotor
 
 
 def crear_cuenta(request):
-    return render(request, 'cuentas/crear_cuenta.html')
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name', '').strip()
+        last_name = request.POST.get('last_name', '').strip()
+        username = request.POST.get('username', '').strip()
+        email = request.POST.get('email', '').strip()
+        password1 = request.POST.get('password1', '').strip()
+        password2 = request.POST.get('password2', '').strip()
 
+        if not all([first_name, last_name, username, email, password1, password2]):
+            messages.error(request, 'Todos los campos son obligatorios.')
+            return render(request, 'cuentas/crear_cuenta.html')
+
+        if password1 != password2:
+            messages.error(request, 'Las contraseñas no coinciden.')
+            return render(request, 'cuentas/crear_cuenta.html')
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Ese nombre de usuario ya esta en uso.')
+            return render(request, 'cuentas/crear_cuenta.html')
+
+        user = User.objects.create_user(
+            username=username,
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            password=password1
+        )
+        user.save()
+
+        messages.success(request, 'Cuenta creada exitosamente. Inicia sesión.')
+        return redirect('cuentas:login')
+
+    return render(request, 'cuentas/crear_cuenta.html')
 
 def inicio_sesion(request):
     if request.method == 'GET':

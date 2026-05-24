@@ -1,0 +1,327 @@
+{% extends "base.html" %}
+
+{% block title %}Perfil — RiShine{% endblock %}
+
+{% block extra_css %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=DM+Sans:wght@400;500&display=swap');
+
+    .perfil-wrap {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    .perfil-titulo {
+        text-align: center;
+        font-family: 'Playfair Display', serif;
+        font-size: 24px;
+        color: #381932;
+        margin-bottom: 1.5rem;
+    }
+
+    .avatar-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 2px solid #DBD0D9;
+        background: #EFEDE3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 8px;
+        overflow: hidden;
+    }
+
+    .avatar-label {
+        font-size: 12px;
+        color: #999;
+    }
+
+    .btn-editar {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #381932;
+        color: #EFEDE3;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 13px;
+        padding: 7px 18px;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+        margin-top: 8px;
+        transition: opacity 0.2s;
+    }
+
+    .btn-editar:hover { opacity: 0.88; }
+
+    .btn-editar.activo {
+        background: #5c2d6e;
+    }
+
+    .main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        align-items: start;
+    }
+
+    .campo {
+        margin-bottom: 14px;
+    }
+
+    .campo label {
+        font-size: 12px;
+        font-weight: 500;
+        color: #302F2C;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .campo input {
+        width: 100%;
+        padding: 9px 14px;
+        border: 1px solid rgba(219,208,217,0.9);
+        border-radius: 8px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 14px;
+        color: #302F2C;
+        background: #faf9f7;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .campo input[readonly] {
+        background: #f1efec;
+        color: #6e6b67;
+        cursor: default;
+    }
+
+    .campo input:focus {
+        border-color: #381932;
+        box-shadow: 0 0 0 3px rgba(56,25,50,0.07);
+        background: #fff;
+    }
+
+    .btns-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 4px;
+        flex-wrap: wrap;
+    }
+
+    .btn-sec {
+        padding: 8px 14px;
+        background: #302F2C;
+        color: #EFEDE3;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
+
+    .btn-sec:hover { opacity: 0.88; }
+
+    .btn-guardar {
+        width: 100%;
+        padding: 11px;
+        background: #381932;
+        color: #EFEDE3;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 1rem;
+        transition: opacity 0.2s;
+    }
+
+    .btn-guardar:hover { opacity: 0.88; }
+
+    .btn-guardar:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .acciones-col {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-accion {
+        width: 100%;
+        padding: 10px 16px;
+        background: #381932;
+        color: #EFEDE3;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: left;
+        transition: opacity 0.2s;
+    }
+
+    .btn-accion:hover { opacity: 0.88; }
+
+    .danger-row {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 1.5rem;
+    }
+
+    .btn-danger {
+        padding: 8px 16px;
+        background: #DBD0D9;
+        color: #381932;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        border: 1px solid rgba(56,25,50,0.25);
+        border-radius: 8px;
+        cursor: pointer;
+        width: fit-content;
+        transition: opacity 0.2s;
+    }
+
+    .btn-danger:hover { opacity: 0.80; }
+
+    .mensaje {
+        margin: 0 auto 14px;
+        max-width: 540px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        background: #f4ecef;
+        color: #381932;
+    }
+
+    @media (max-width: 560px) {
+        .main-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block contenido %}
+
+<div class="perfil-wrap">
+
+    {% if messages %}
+        {% for message in messages %}
+            <p class="mensaje">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <p class="perfil-titulo">Perfil</p>
+
+    <div class="avatar-wrap">
+        <div class="avatar">
+            <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="#381932" stroke-width="2" stroke-linecap="round">
+                <circle cx="32" cy="32" r="30" stroke="#DBD0D9"/>
+                <circle cx="23" cy="28" r="2" fill="#381932" stroke="none"/>
+                <circle cx="41" cy="28" r="2" fill="#381932" stroke="none"/>
+                <path d="M22 40 Q32 48 42 40"/>
+                <path d="M20 24 Q22 20 26 22"/>
+                <path d="M44 24 Q42 20 38 22"/>
+            </svg>
+        </div>
+        <span class="avatar-label">Foto de perfil</span>
+        <button id="btn-editar-perfil" type="button" class="btn-editar">✏ Editar perfil</button>
+    </div>
+
+    <div class="main-grid">
+        <div>
+            <form method="post" action="{% url 'usuarios:perfil' %}">
+            {% csrf_token %}
+            <div class="campo">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" value="{{ request.user.first_name|default:'' }}" placeholder="Tu nombre" readonly>
+            </div>
+            <div class="campo">
+                <label for="apellido">Apellido</label>
+                <input type="text" id="apellido" name="apellido" value="{{ request.user.last_name|default:'' }}" placeholder="Tu apellido" readonly>
+            </div>
+            <div class="campo">
+                <label for="correo">Correo</label>
+                <input type="email" id="correo" name="correo" value="{{ request.user.email|default:'' }}" placeholder="correo@ejemplo.com" readonly>
+            </div>
+            <button id="btn-guardar-perfil" type="submit" class="btn-guardar" disabled>Guardar cambios</button>
+            </form>
+        </div>
+
+        <div class="acciones-col">
+            <button class="btn-accion">Ver historial</button>
+            <button class="btn-accion">Favoritos</button>
+            <button class="btn-accion">Eventos Guardados</button>
+        </div>
+    </div>
+
+        <div class="danger-row">
+            <form action="{% url 'usuarios:logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn-danger">Cerrar sesión</button>
+            </form>
+
+            <form action="{% url 'usuarios:eliminar_cuenta' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn-danger" onclick="return confirm('¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.')">
+                    Eliminar cuenta
+                </button>
+            </form>
+        </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    (function () {
+        const btnEditar = document.getElementById('btn-editar-perfil');
+        const btnGuardar = document.getElementById('btn-guardar-perfil');
+        const campos = [
+            document.getElementById('nombre'),
+            document.getElementById('apellido'),
+            document.getElementById('correo')
+        ];
+
+        if (!btnEditar || !btnGuardar) return;
+
+        let editable = false;
+
+        btnEditar.addEventListener('click', function () {
+            editable = !editable;
+            campos.forEach(function (campo) {
+                if (!campo) return;
+                campo.readOnly = !editable;
+            });
+
+            btnGuardar.disabled = !editable;
+            btnEditar.classList.toggle('activo', editable);
+            btnEditar.textContent = editable ? '✓ Edicion activa' : '✏ Editar perfil';
+
+            if (editable && campos[0]) {
+                campos[0].focus();
+            }
+        });
+
+    })();
+</script>
+{% endblock %}
