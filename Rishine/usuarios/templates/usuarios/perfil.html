@@ -195,7 +195,8 @@
         border: 1px solid rgba(56,25,50,0.25);
         border-radius: 8px;
         cursor: pointer;
-        width: fit-content;
+        min-width: 140px;
+        text-align: center;
         transition: opacity 0.2s;
     }
 
@@ -267,9 +268,9 @@
         </div>
 
         <div class="acciones-col">
-            <button class="btn-accion">Ver historial</button>
-            <button class="btn-accion">Favoritos</button>
-            <button class="btn-accion">Eventos Guardados</button>
+            <button class="btn-accion" onclick="mostrarToast()">Ver historial</button>
+            <a href="{% url 'usuarios:favoritos' %}" class="btn-accion" style="text-decoration: none; display: block;">Favoritos</a>
+            <a href="{% url 'usuarios:guardados' %}" class="btn-accion" style="text-decoration: none; display: block;">Eventos Guardados</a>
         </div>
     </div>
 

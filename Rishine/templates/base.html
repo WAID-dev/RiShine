@@ -28,6 +28,33 @@
     <main class="contenido">
         {% block contenido %}{% endblock %}
     </main>
-    {% block extra_js %}{% endblock %}
+    {% block extra_js %} {% endblock %}
+
+    <script>
+        function mostrarToast() {
+            const toast = document.getElementById('toast');
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 3000);
+        }
+    </script>
+
+    <!-- Toast -->
+    <div id="toast" style="
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #381932;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 20px;
+        font-size: 14px;
+        opacity: 0;
+        transition: opacity 0.4s;
+        z-index: 9999;
+        pointer-events: none;
+    ">Esta función estará próximamente</div>
 </body>
 </html>

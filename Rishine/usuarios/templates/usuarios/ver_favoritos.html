@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Mis Favoritos — RiShine{% endblock %}
+
+{% block contenido %}
+<div style="max-width: 700px; margin: 0 auto; padding: 2rem 1rem;">
+
+    <p style="font-family: 'Playfair Display', serif; font-size: 24px; color: #381932; text-align: center; margin-bottom: 1.5rem;">
+        Mis Favoritos
+    </p>
+
+    {% if favoritos %}
+        {% for favorito in favoritos %}
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: #faf9f7; border: 1px solid rgba(219,208,217,0.9); border-radius: 10px; margin-bottom: 10px;">
+            <div>
+                <p style="font-weight: 500; font-size: 15px; color: #302F2C; margin: 0 0 4px;">{{ favorito.evento.titulo }}</p>
+                <p style="font-size: 13px; color: #888; margin: 0;">{{ favorito.evento.promotor.organizacion }}</p>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="id_favorito" value="{{ favorito.id_favorito }}">
+                <button type="submit" style="background: none; border: none; cursor: pointer; font-size: 18px; color: #381932;" title="Eliminar de favoritos">✕</button>
+            </form>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align: center; color: #888;">No tienes eventos favoritos aún.</p>
+    {% endif %}
+
+    <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="{% url 'usuarios:perfil' %}" style="font-size: 13px; color: #381932;">← Volver al perfil</a>
+    </div>
+
+</div>
+{% endblock %}
