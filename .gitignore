@@ -8,6 +8,9 @@ venv/
 env/
 ../.venv/
 
+# Variables de entorno virtual
+.env
+
 # Django
 db.sqlite3
 db.sqlite3-journal

@@ -1,0 +1,206 @@
+*{
+    box-sizing: border-box;
+}
+
+
+:root {
+    /* MARCA */
+    --color-primary: #4F46E5;
+    --color-primary-hover: #4338CA;
+    --color-primary-active: #3730A3;
+    --color-primary-soft: #EEF2FF;
+    --color-primary-deep: #1E1B4B;
+
+    --color-mint: #34D399;
+    --color-mint-strong: #047857;
+    --color-mint-soft: #ECFDF5;
+
+    --color-amber: #F59E0B;
+    --color-amber-hover: #D97706;
+    --color-amber-strong: #92400E;
+    --color-amber-soft: #FEF3C7;
+
+    /* FONDOS */
+    --bg-page: #F7F7FB;
+    --bg-surface: #FFFFFF;
+    --bg-subtle: #F0F1F8;
+    --bg-inverse: #1E1B4B;
+
+    /* TEXTO */
+    --text-primary: #16152B;
+    --text-secondary: #55556D;
+    --text-muted: #6B6B85;
+    --text-on-primary: #FFFFFF;
+    --text-on-inverse: #E0E7FF;
+    --text-on-inverse-strong: #FFFFFF;
+    --text-on-error: #FFFFFF;
+
+    /* BORDES */
+    --border: #E3E4EF;
+    --border-strong: #8B8CA6;
+
+    /* ESTADOS */
+    --color-success: #047857;
+    --color-success-soft: #ECFDF5;
+    --color-warning: #B45309;
+    --color-warning-soft: #FEF3C7;
+    --color-error: #C81E1E;
+    --color-error-soft: #FEF2F2;
+    --color-info: #2563EB;
+    --color-info-soft: #EFF6FF;
+}
+
+body.dark-mode {
+    /* MARCA */
+    --color-primary: #818CF8;
+    --color-primary-hover: #A5B4FC;
+    --color-primary-active: #C7D2FE;
+    --color-primary-soft: #26264A;
+    --color-primary-deep: #1E1B4B;
+
+    --color-mint: #34D399;
+    --color-mint-strong: #6EE7B7;
+    --color-mint-soft: #10302A;
+
+    --color-amber: #F59E0B;
+    --color-amber-hover: #D97706;
+    --color-amber-strong: #FCD34D;
+    --color-amber-soft: #3A2A0C;
+
+    /* FONDOS */
+    --bg-page: #0F0E1F;
+    --bg-surface: #19182E;
+    --bg-subtle: #22213B;
+    --bg-inverse: #0A0918;
+
+    /* TEXTO */
+    --text-primary: #F1F1F8;
+    --text-secondary: #B4B4CC;
+    --text-muted: #8A8AA8;
+    --text-on-primary: #14132B;
+    --text-on-inverse: #E0E7FF;
+    --text-on-inverse-strong: #FFFFFF;
+    --text-on-error: #14132B;
+
+    /* BORDES */
+    --border: #2E2D4A;
+    --border-strong: #666594;
+
+    /* ESTADOS */
+    --color-success: #34D399;
+    --color-success-soft: #10302A;
+    --color-warning: #FBBF24;
+    --color-warning-soft: #3A2A0C;
+    --color-error: #F87171;
+    --color-error-soft: #3A1414;
+    --color-info: #60A5FA;
+    --color-info-soft: #132A4A;
+}
+
+body {
+    font-family: 'Sora', 'Inter', sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    min-height: 100vh;
+    margin: 0;
+}
+
+.contenido {
+    padding: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: var(--text-primary);
+    font-family: 'inter', sans-serif;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Sora', sans-serif;
+}
+
+h1{
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 52px;
+    letter-spacing: -0.03em;
+}
+
+h2{
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+}
+
+h3{
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+}
+
+h4{
+    font-family: 'Sora', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+.text-inter {
+    font-family: 'Inter', sans-serif;
+}
+
+.text-lg {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 400; /* Peso normal */
+}
+
+.text-base {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.text-sm {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.text-xs {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.ui-button{
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.ui-label{
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.ui-eyebrow{
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

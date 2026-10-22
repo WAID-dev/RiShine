@@ -1,0 +1,146 @@
+nav.navbar {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-inverse);
+    padding: 0 32px;
+    height: 60px;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    border-bottom: 1px solid var(--border);
+}
+
+nav.navbar .lista-elementos {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    gap: 24px;
+}
+
+nav.navbar .lista-elementos li:first-child {
+    margin-right: auto;
+}
+
+/* CSS DEL LOGO */
+nav.navbar .logo {
+    color: #818CF8;
+    font-family: 'Sora', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    margin-right: auto;
+}
+
+/* CSS DEL Buscador */
+.buscador-nav {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    gap: 8px;
+    margin-right: 8px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.buscador-nav svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.buscador-nav:focus-within {
+    border-color: var(--border-strong, #0030cc);
+    box-shadow: 0 0 0 2px rgba(0, 48, 204, 0.2);
+}
+
+.buscador-nav input {
+    background: transparent;
+    border-style: none;
+    outline: none;
+    width: 100%;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+}
+
+.buscador-nav input::placeholder {
+    color: var(--text-muted);
+}
+
+.buscador-nav input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 18px;
+    width: 18px;
+    cursor: pointer;
+    transition: transform 0.1s ease, filter 0.2s ease;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="%23e63946" d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.buscador-nav input::-webkit-search-cancel-button:hover {
+    transform: scale(1.05);
+}
+
+/* CSS del botón Crear Evento */
+nav.navbar a.crear-evento {
+    color: var(--text-on-inverse);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: background-color 0.2s, color 0.2s;
+    white-space: nowrap;
+}
+
+nav.navbar a.crear-evento:hover {
+    background-color: var(--color-primary-soft);
+    color: var(--color-primary);
+}
+
+nav.navbar a.crear-evento.activo {
+    background-color: var(--color-primary);
+    color: var(--text-on-primary);
+}
+
+
+/* CSS Perfil */
+.nav-perfil {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--color-primary-soft);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: opacity 0.2s, background-color 0.2s;
+}
+
+
+.nav-perfil:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.nav-perfil:hover svg {
+    stroke: var(--text-on-primary);
+}
+
+.nav-perfil svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--color-primary);
+    transition: stroke 0.2s;
+}
