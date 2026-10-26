@@ -1,0 +1,467 @@
+/* QUÉ HAY AQUÍ
+   ÍNDICE
+   0. Tokens locales (espaciado, radios, sombras, movimiento)
+   1. Contenedor y encabezado
+   2. Enlaces
+   3. Tarjeta
+   4. Formulario y campos
+   5. Casilla (checkbox)
+   6. Botones
+   7. Alertas
+   8. Pie de la pantalla
+   9. Responsive (mobile-first, cortes de la guía: 640 / 768 / 1024)
+   10. Movimiento reducido */
+
+.cuenta {
+    /* Escala de espaciado, base 4px. No inventes valores intermedios. */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+
+    /* Radios */
+    --radius-sm: 4px;    /* checkboxes */
+    --radius-md: 8px;    /* botones, inputs, alertas */
+    --radius-lg: 16px;   /* tarjetas */
+    --radius-full: 999px;
+
+    /* Sombras: Valores sutiles que se ven bien en claro y oscuro. */
+    --shadow-sm: 0 1px 2px rgba(22, 21, 43, 0.08), 0 1px 3px rgba(22, 21, 43, 0.06);
+
+    /* Movimiento: 180 ms en color, borde y sombra */
+    --duracion: 180ms;
+
+    /* Alturas táctiles: mínimo 44px (36px en botones pequeños) */
+    --alto-control: 44px;
+    --alto-control-sm: 36px;
+    --alto-control-lg: 52px;
+}
+
+
+/* 1. CONTENEDOR Y ENCABEZADO
+   Contenedor angosto de 720px para formularios. El .contenido global
+   (base.html) ya centra a 1200px; este bloque se angosta dentro de él. */
+.cuenta {
+    max-width: 720px;
+    margin: 0 auto;
+    padding-block: var(--space-4);          /* se amplía en escritorio. */
+}
+
+.cuenta__encabezado {
+    margin-bottom: var(--space-6);
+}
+
+/* Eyebrow: texto corto encima del título, siempre en mayúsculas. */
+.cuenta__eyebrow {
+    margin: 0 0 var(--space-2);
+    color: var(--color-primary);
+    text-transform: uppercase;
+}
+
+/* h1 de la guía: 52px en escritorio, 32px en celular. */
+.cuenta__titulo {
+    margin: 0 0 var(--space-3);
+    font-size: 32px;
+    line-height: 1.1;
+    color: var(--text-primary);
+}
+
+/* Párrafo destacado bajo el título, máx. 68 caracteres por línea */
+.cuenta__intro {
+    margin: 0;
+    max-width: 68ch;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* h2 dentro de la tarjeta: en celular 24px, en escritorio 32px (sec. 9) */
+.cuenta__subtitulo {
+    margin: 0 0 var(--space-5);
+    font-size: 24px;
+    line-height: 1.2;
+    color: var(--text-primary);
+}
+
+
+/* 2. ENLACES  (guía §2: los enlaces van en color-primary) */
+.cuenta .enlace {
+    color: var(--color-primary);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    border-radius: var(--radius-sm);
+    transition: color var(--duracion);
+}
+
+.cuenta .enlace:hover {
+    color: var(--color-primary-hover);
+}
+
+
+/* FOCO DE TECLADO  (guía §1: hueco de 2px del color de la página + aro sólido
+   de 2px en color-primary. No se quita de ningún control.)
+   Dentro de la tarjeta el "color de la página" visible es bg-surface. */
+.cuenta a:focus-visible,
+.cuenta .btn:focus-visible,
+.cuenta .campo__control:focus-visible,
+.cuenta .casilla__control:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--color-primary);
+}
+
+/* Los enlaces que quedan sobre bg-page (fuera de la tarjeta) usan ese fondo */
+.cuenta__pie a:focus-visible {
+    box-shadow: 0 0 0 2px var(--bg-page), 0 0 0 4px var(--color-primary);
+}
+
+
+/* 3. TARJETA  (guía §6 Tarjeta)
+   bg-surface, borde border, radius-lg, relleno space-5, shadow-sm */
+.cuenta .tarjeta {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-sm);
+}
+
+
+/* 4. FORMULARIO Y CAMPOS  (guía §6 Formularios)
+   Etiqueta siempre arriba y visible; ayuda o error debajo.
+   space-5 entre campos; un campo por fila en celular. */
+.cuenta .formulario {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+/* Fila de dos campos: apilados en celular, en columnas desde tableta (sec. 9) */
+.cuenta .formulario__fila {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+}
+
+.cuenta .campo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);                    /* etiqueta ↔ campo ↔ ayuda */
+    min-width: 0;                           /* deja que el grid encoja el input */
+}
+
+.cuenta .campo__etiqueta {
+    color: var(--text-primary);
+}
+
+/* Control de texto, correo, fecha y contraseña */
+.cuenta .campo__control {
+    width: 100%;
+    min-height: var(--alto-control);        /* objetivo táctil ≥ 44px */
+    padding: var(--space-3) var(--space-4); /* space-3 vertical */
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong); /* el borde marca dónde se toca */
+    border-radius: var(--radius-md);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;                        /* text-base: evita zoom en iOS */
+    font-weight: 400;
+    line-height: 1.25;
+    transition: border-color var(--duracion), box-shadow var(--duracion),
+                background-color var(--duracion);
+}
+
+.cuenta .campo__control::placeholder {
+    color: var(--text-muted);
+    opacity: 1;                             /* Firefox baja la opacidad por defecto */
+}
+
+/* Al escribir: borde primario + aro de foco (el aro lo pone :focus-visible) */
+.cuenta .campo__control:focus {
+    border-color: var(--color-primary);
+}
+
+/* Campo deshabilitado: bg-subtle */
+.cuenta .campo__control:disabled {
+    background-color: var(--bg-subtle);
+    cursor: not-allowed;
+}
+
+/* Error: borde color-error + mensaje debajo que explica cómo corregir */
+.cuenta .campo__control.is-invalid,
+.cuenta .campo__control[aria-invalid="true"] {
+    border-color: var(--color-error);
+}
+
+/* En el tema oscuro, el selector de fecha nativo debe verse claro */
+.cuenta .campo__control[type="date"] {
+    color-scheme: light dark;
+}
+
+/* Ayuda: text-sm en text-muted */
+.cuenta .campo__ayuda {
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* Mensaje de error: text-sm en color-error.
+   `hidden` lo oculta; el JS lo muestra o lo oculta sin tocar el layout. */
+.cuenta .campo__error {
+    margin: 0;
+    color: var(--color-error);
+    line-height: 1.4;
+}
+
+.cuenta .campo__error[hidden] {
+    display: none;
+}
+
+/* Grupo input + botón "Mostrar" (contraseñas).
+   El botón vive dentro del borde del input, a la derecha. */
+.cuenta .campo__grupo {
+    position: relative;
+    display: flex;
+}
+
+.cuenta .campo__grupo .campo__control {
+    padding-right: 88px;                    /* deja espacio al botón */
+}
+
+.cuenta .campo__mostrar {
+    position: absolute;
+    top: 50%;
+    right: var(--space-2);
+    transform: translateY(-50%);
+}
+
+/* `hidden` debe ganar al display del .btn (sin JS no hay botón muerto) */
+.cuenta .campo__mostrar[hidden] {
+    display: none;
+}
+
+/* El botón fantasma no se encoge al presionarlo aquí: conserva su posición
+   centrada (el transform de arriba lo ocupa). */
+.cuenta .campo__mostrar:active {
+    transform: translateY(-50%) scale(0.98);
+}
+
+
+/* 5. CASILLA / CHECKBOX  (radius-sm, guía §5)
+   Se redibuja con appearance:none para controlar radio y colores con tokens.
+   La etiqueta completa es tocable y mide ≥ 44px de alto. */
+.cuenta .casilla {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: var(--alto-control);
+    cursor: pointer;
+}
+
+.cuenta .casilla__control {
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color var(--duracion), border-color var(--duracion),
+                box-shadow var(--duracion);
+}
+
+.cuenta .casilla__control:checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+/* Palomita dibujada con bordes; usa text-on-primary (nunca blanco a mano) */
+.cuenta .casilla__control:checked::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--text-on-primary);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.cuenta .casilla__control[aria-invalid="true"] {
+    border-color: var(--color-error);
+}
+
+.cuenta .casilla__texto {
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+
+/* 6. BOTONES  (guía §6 Botones)
+   Variantes usadas aquí: principal (Crear mi cuenta) y fantasma (Mostrar).
+   Todas con 180 ms de transición y encogen a 98% al presionar.
+   Tamaños: sm 36px · normal 44px · lg 52px. */
+.cuenta .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--alto-control);
+    padding: 0 var(--space-5);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;                       /* ui-button */
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--duracion), color var(--duracion),
+                border-color var(--duracion), box-shadow var(--duracion),
+                transform var(--duracion);
+}
+
+.cuenta .btn:active {
+    transform: scale(0.98);
+}
+
+.cuenta .btn--sm {
+    min-height: var(--alto-control-sm);
+    padding: 0 var(--space-3);
+    font-size: 14px;
+}
+
+.cuenta .btn--lg {
+    min-height: var(--alto-control-lg);
+}
+
+/* PRINCIPAL: índigo de marca; texto con su pareja text-on-primary */
+.cuenta .btn--principal {
+    background-color: var(--color-primary);
+    color: var(--text-on-primary);
+}
+
+.cuenta .btn--principal:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.cuenta .btn--principal:active {
+    background-color: var(--color-primary-active);
+}
+
+/* FANTASMA: acción discreta (botón "Mostrar" de la contraseña) */
+.cuenta .btn--fantasma {
+    background-color: transparent;
+    color: var(--color-primary);
+}
+
+.cuenta .btn--fantasma:hover {
+    background-color: var(--color-primary-soft);
+}
+
+/* En celular el botón principal del formulario ocupa todo el ancho */
+.cuenta .formulario__enviar {
+    width: 100%;
+}
+
+
+/* 7. ALERTAS  (guía §6 Alertas)
+   Cuatro tonos con fondo suave y borde del mismo color. Aparecen arriba del
+   contenido. El texto va en text-primary (contraste sobre el fondo suave) y
+   la palabra de estado (<strong>) en el color del tono. */
+.cuenta__alertas {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+}
+
+.cuenta .alerta {
+    padding: var(--space-4);                /* space-4 */
+    border: 1px solid;
+    border-radius: var(--radius-md);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;                        /* text-sm */
+    line-height: 1.5;
+    color: var(--text-primary);
+}
+
+.cuenta .alerta strong {
+    font-weight: 600;
+}
+
+.cuenta .alerta--success {
+    background-color: var(--color-success-soft);
+    border-color: var(--color-success);
+}
+.cuenta .alerta--success strong { color: var(--color-success); }
+
+.cuenta .alerta--info {
+    background-color: var(--color-info-soft);
+    border-color: var(--color-info);
+}
+.cuenta .alerta--info strong { color: var(--color-info); }
+
+.cuenta .alerta--warning {
+    background-color: var(--color-warning-soft);
+    border-color: var(--color-warning);
+}
+.cuenta .alerta--warning strong { color: var(--color-warning); }
+
+.cuenta .alerta--error {
+    background-color: var(--color-error-soft);
+    border-color: var(--color-error);
+}
+.cuenta .alerta--error strong { color: var(--color-error); }
+
+/* Django también emite el nivel "debug"; se ve como información */
+.cuenta .alerta--debug {
+    background-color: var(--color-info-soft);
+    border-color: var(--color-info);
+}
+
+
+/* 8. PIE DE LA PANTALLA ("¿Ya tienes cuenta?") */
+.cuenta__pie {
+    margin: var(--space-5) 0 0;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+
+/* 9. RESPONSIVE (mobile-first: 640 / 768 / 1024)
+   Sección reconstruida a partir de los comentarios de este mismo archivo. */
+@media (min-width: 640px) {
+    .cuenta__titulo { font-size: 52px; }
+    .cuenta .formulario__enviar { width: auto; }
+}
+
+@media (min-width: 768px) {
+    .cuenta .formulario__fila { grid-template-columns: 1fr 1fr; }
+    .cuenta__subtitulo { font-size: 32px; }
+}
+
+@media (min-width: 1024px) {
+    .cuenta { padding-block: var(--space-8); }
+}
+
+
+/* 10. MOVIMIENTO REDUCIDO (todo cambia al instante) */
+@media (prefers-reduced-motion: reduce) {
+    .cuenta .btn,
+    .cuenta .enlace,
+    .cuenta .campo__control,
+    .cuenta .casilla__control {
+        transition: none;
+    }
+
+    .cuenta .btn:active { transform: none; }
+    .cuenta .campo__mostrar:active { transform: translateY(-50%); }
+}

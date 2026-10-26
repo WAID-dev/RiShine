@@ -1,0 +1,219 @@
+/* Define los colores, sombras y tiempos de animación del tema claro. */
+.login {
+    color-scheme: light dark;
+
+    --color-primary: #4F46E5;
+    --color-primary-hover: #4338CA;
+    --color-primary-active: #3730A3;
+    --bg-surface: #FFFFFF;
+    --text-primary: #16152B;
+    --text-secondary: #55556D;
+    --text-on-primary: #FFFFFF;
+    --border: #E3E4EF;
+    --border-strong: #8B8CA6;
+
+    --color-success: #047857;
+    --color-success-soft: #ECFDF5;
+    --color-warning: #B45309;
+    --color-warning-soft: #FEF3C7;
+    --color-error: #C81E1E;
+    --color-error-soft: #FEF2F2;
+    --color-info: #2563EB;
+    --color-info-soft: #EFF6FF;
+
+    --shadow-sm: 0 1px 2px rgb(22 21 43 / 0.06), 0 1px 3px rgb(22 21 43 / 0.08);
+    --duracion: 180ms;
+}
+
+/* Cambia los colores cuando el usuario tiene activado el tema oscuro. */
+@media (prefers-color-scheme: dark) {
+    .login {
+        --color-primary: #818CF8;
+        --color-primary-hover: #A5B4FC;
+        --color-primary-active: #C7D2FE;
+        --bg-surface: #19182E;
+        --text-primary: #F1F1F8;
+        --text-secondary: #B4B4CC;
+        --text-on-primary: #14132B;
+        --border: #2E2D4A;
+        --border-strong: #666594;
+
+        --color-success: #34D399;
+        --color-success-soft: #10302A;
+        --color-warning: #FBBF24;
+        --color-warning-soft: #3A2A0C;
+        --color-error: #F87171;
+        --color-error-soft: #3A1414;
+        --color-info: #60A5FA;
+        --color-info-soft: #132A4A;
+
+        --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4), 0 1px 3px rgb(0 0 0 / 0.3);
+    }
+}
+
+/* Da formato al contenedor, centrando el formulario y definiendo su apariencia. */
+.login {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Define el tamaño, la fuente y el espacio del título. */
+.login__titulo {
+    margin: 0 0 32px;
+    font-family: "Sora", system-ui, sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--text-primary);
+}
+
+/* Aumenta el tamaño del título en pantallas más grandes. */
+@media (min-width: 640px) {
+    .login__titulo { font-size: 52px; }
+}
+
+/* Coloca la etiqueta y el campo en columna, con separación entre ellos. */
+.login__campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0 0 24px;
+}
+
+/* Da formato a las etiquetas de los campos. */
+.login__campo label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* Define el tamaño, los colores y los bordes de los campos de entrada. */
+.login__campo input {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 44px;
+    padding: 12px 16px;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    font: inherit;
+    transition: border-color var(--duracion), box-shadow var(--duracion);
+}
+
+/* Marca en rojo los campos que no cumplen la validación del navegador. */
+.login__campo input:user-invalid {
+    border-color: var(--color-error);
+}
+
+/* Resalta los elementos al seleccionarlos con el teclado. */
+.login input:focus-visible,
+.login button:focus-visible,
+.login a:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--color-primary);
+}
+
+/* Cambia el borde del campo que está seleccionado. */
+.login__campo input:focus-visible {
+    border-color: var(--color-primary);
+}
+
+/* Da formato al botón para enviar el formulario. */
+.login__boton {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 44px;
+    padding: 12px 24px;
+    background: var(--color-primary);
+    color: var(--text-on-primary);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+    cursor: pointer;
+    transition: background-color var(--duracion), box-shadow var(--duracion),
+                transform var(--duracion);
+}
+
+/* Ajusta el ancho del botón en pantallas más grandes. */
+@media (min-width: 640px) {
+    .login__boton { width: auto; }
+}
+
+/* Oscurece el botón cuando el cursor pasa sobre él. */
+.login__boton:hover {
+    background: var(--color-primary-hover);
+}
+
+/* Cambia el color y reduce ligeramente el botón al presionarlo. */
+.login__boton:active {
+    background: var(--color-primary-active);
+    transform: scale(0.98);
+}
+
+/* Da espacio al texto que invita a crear una cuenta. */
+.login__registro {
+    margin: 16px 0 0;
+    color: var(--text-secondary);
+}
+
+/* Da formato al enlace de registro y facilita su selección. */
+.login a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-primary);
+    text-decoration: underline;
+    border-radius: 8px;
+    transition: color var(--duracion);
+}
+
+/* Cambia el color del enlace cuando el cursor pasa sobre él. */
+.login a:hover {
+    color: var(--color-primary-hover);
+}
+
+/* Define la apariencia general de los mensajes de Django. */
+.login__alerta {
+    margin: 0 0 24px;
+    padding: 16px;
+    background: var(--alerta-fondo, var(--color-info-soft));
+    color: var(--text-primary);
+    border: 1px solid var(--alerta-color, var(--color-info));
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* Asigna colores diferentes según el tipo de mensaje. */
+.login__alerta--success { --alerta-color: var(--color-success); --alerta-fondo: var(--color-success-soft); }
+.login__alerta--error   { --alerta-color: var(--color-error);   --alerta-fondo: var(--color-error-soft); }
+.login__alerta--warning { --alerta-color: var(--color-warning); --alerta-fondo: var(--color-warning-soft); }
+.login__alerta--info    { --alerta-color: var(--color-info);    --alerta-fondo: var(--color-info-soft); }
+
+/* Desactiva las animaciones si el usuario prefiere movimiento reducido. */
+@media (prefers-reduced-motion: reduce) {
+    .login__boton,
+    .login a,
+    .login__campo input {
+        transition: none;
+    }
+
+    /* Evita que el botón cambie de tamaño al presionarlo. */
+    .login__boton:active {
+        transform: none;
+    }
+}

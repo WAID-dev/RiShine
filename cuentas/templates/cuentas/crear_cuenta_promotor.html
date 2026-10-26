@@ -1,0 +1,228 @@
+{# Hereda la estructura general de base.html #}
+{% extends 'base.html' %}
+
+{# Habilita el uso de archivos estáticos, como CSS e imágenes #}
+{% load static %}
+
+{# Carga los estilos específicos del formulario de creación de cuenta #}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cuentas/css/crear_cuenta.css' %}">
+    <link rel="stylesheet" href="{% static 'cuentas/css/crear_cuenta_promotor.css' %}">
+{% endblock %}
+
+{# Contenido principal de la página #}
+{% block contenido %}
+<div class="cuenta">
+
+    {# Muestra los mensajes del sistema, como errores o confirmaciones #}
+    {% if messages %}
+    <div class="cuenta__alertas">
+        {% for message in messages %}
+
+            {# Limita la cantidad de mensajes mostrados a dos #}
+            {% if forloop.counter <= 2 %}
+            <div class="alerta alerta--{{ message.level_tag }}"
+                 role="{% if message.level_tag == 'error' %}alert{% else %}status{% endif %}">
+
+                {# Define el título según el tipo de mensaje #}
+                <strong>
+                    {% if message.level_tag == 'success' %}Listo.
+                    {% elif message.level_tag == 'warning' %}Atención.
+                    {% elif message.level_tag == 'error' %}Error.
+                    {% else %}Aviso.
+                    {% endif %}
+                </strong>
+
+                {# Muestra el contenido del mensaje #}
+                {{ message }}
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {# Encabezado con el título y la descripción del registro #}
+    <header class="cuenta__encabezado">
+        <p class="ui-eyebrow cuenta__eyebrow">Cuenta de promotor</p>
+        <h1 class="cuenta__titulo">Crea tu cuenta</h1>
+        <p class="text-lg cuenta__intro">
+            Regístrate para publicar talleres, concursos, clubes y conferencias en Guadalajara.
+        </p>
+    </header>
+
+    {# Tarjeta que contiene el formulario de registro #}
+    <section class="tarjeta" aria-labelledby="titulo-formulario">
+        <h2 id="titulo-formulario" class="cuenta__subtitulo">Tus datos</h2>
+
+        {# multipart/form-data permite enviar archivos al servidor #}
+        <form class="formulario"
+              id="form-crear-cuenta-promotor"
+              method="post"
+              action=""
+              enctype="multipart/form-data">
+
+            {# Protege el formulario contra solicitudes CSRF #}
+            {% csrf_token %}
+
+            {# Campos para capturar el nombre y los apellidos #}
+            <div class="formulario__fila">
+                <div class="campo">
+                    <label class="ui-label campo__etiqueta" for="nombre">Nombre</label>
+                    <input class="campo__control{% if errores.nombre %} is-invalid{% endif %}"
+                           type="text" id="nombre" name="nombre"
+                           value="{{ valores.nombre|default:'' }}"
+                           placeholder="Ej. Mariana" autocomplete="given-name" required
+                           {% if errores.nombre %}aria-invalid="true"{% endif %}
+                           aria-describedby="error-nombre">
+
+                    {# Muestra el error del nombre cuando existe #}
+                    <p class="text-sm campo__error" id="error-nombre"
+                       {% if not errores.nombre %}hidden{% endif %}>{{ errores.nombre }}</p>
+                </div>
+
+                <div class="campo">
+                    <label class="ui-label campo__etiqueta" for="apellidos">Apellidos</label>
+                    <input class="campo__control{% if errores.apellidos %} is-invalid{% endif %}"
+                           type="text" id="apellidos" name="apellidos"
+                           value="{{ valores.apellidos|default:'' }}"
+                           placeholder="Ej. López Ramírez" autocomplete="family-name" required
+                           {% if errores.apellidos %}aria-invalid="true"{% endif %}
+                           aria-describedby="error-apellidos">
+
+                    {# Muestra el error de los apellidos cuando existe #}
+                    <p class="text-sm campo__error" id="error-apellidos"
+                       {% if not errores.apellidos %}hidden{% endif %}>{{ errores.apellidos }}</p>
+                </div>
+            </div>
+
+            {# Campo para registrar el correo electrónico #}
+            <div class="campo">
+                <label class="ui-label campo__etiqueta" for="correo">Correo electrónico</label>
+                <input class="campo__control{% if errores.correo %} is-invalid{% endif %}"
+                       type="email" id="correo" name="correo"
+                       value="{{ valores.correo|default:'' }}"
+                       placeholder="tucorreo@ejemplo.com" autocomplete="email" required
+                       {% if errores.correo %}aria-invalid="true"{% endif %}
+                       aria-describedby="ayuda-correo error-correo">
+
+                {# Explica para qué se utilizará el correo #}
+                <p class="text-sm campo__ayuda" id="ayuda-correo">
+                    Lo usarás para iniciar sesión y recibir avisos de tus eventos.
+                </p>
+
+                {# Muestra el error del correo cuando existe #}
+                <p class="text-sm campo__error" id="error-correo"
+                   {% if not errores.correo %}hidden{% endif %}>{{ errores.correo }}</p>
+            </div>
+
+            {# Campos para crear y confirmar la contraseña #}
+            <div class="formulario__fila">
+                <div class="campo">
+                    <label class="ui-label campo__etiqueta" for="contrasena">Contraseña</label>
+                    <input class="campo__control{% if errores.contrasena %} is-invalid{% endif %}"
+                           type="password" id="contrasena" name="contrasena"
+                           minlength="8" autocomplete="new-password" required
+                           {% if errores.contrasena %}aria-invalid="true"{% endif %}
+                           aria-describedby="ayuda-contrasena error-contrasena">
+
+                    {# Indica la longitud mínima de la contraseña #}
+                    <p class="text-sm campo__ayuda" id="ayuda-contrasena">
+                        Usa al menos 8 caracteres.
+                    </p>
+
+                    {# Muestra el error de la contraseña cuando existe #}
+                    <p class="text-sm campo__error" id="error-contrasena"
+                       {% if not errores.contrasena %}hidden{% endif %}>{{ errores.contrasena }}</p>
+                </div>
+
+                <div class="campo">
+                    <label class="ui-label campo__etiqueta" for="contrasena2">
+                        Confirma tu contraseña
+                    </label>
+                    <input class="campo__control{% if errores.contrasena2 %} is-invalid{% endif %}"
+                           type="password" id="contrasena2" name="contrasena2"
+                           minlength="8" autocomplete="new-password" required
+                           {% if errores.contrasena2 %}aria-invalid="true"{% endif %}
+                           aria-describedby="error-contrasena2">
+
+                    {# Muestra el error de la confirmación cuando existe #}
+                    <p class="text-sm campo__error" id="error-contrasena2"
+                       {% if not errores.contrasena2 %}hidden{% endif %}>{{ errores.contrasena2 }}</p>
+                </div>
+            </div>
+
+            {# Campo para indicar el nombre de la organización #}
+            <div class="campo">
+                <label class="ui-label campo__etiqueta" for="organizacion">Organización</label>
+                <input class="campo__control{% if errores.organizacion %} is-invalid{% endif %}"
+                       type="text" id="organizacion" name="organizacion" maxlength="50"
+                       value="{{ valores.organizacion|default:'' }}"
+                       placeholder="Ej. Club de robótica CUCEI"
+                       autocomplete="organization" required
+                       {% if errores.organizacion %}aria-invalid="true"{% endif %}
+                       aria-describedby="ayuda-organizacion error-organizacion">
+
+                {# Explica qué organización debe registrar el usuario #}
+                <p class="text-sm campo__ayuda" id="ayuda-organizacion">
+                    El club, la escuela o el colectivo que organiza tus eventos.
+                </p>
+
+                {# Muestra el error de la organización cuando existe #}
+                <p class="text-sm campo__error" id="error-organizacion"
+                   {% if not errores.organizacion %}hidden{% endif %}>{{ errores.organizacion }}</p>
+            </div>
+
+            {# Campo para subir la identificación oficial del promotor #}
+            <div class="campo">
+                <label class="ui-label campo__etiqueta" for="ine">INE</label>
+                <input class="campo__control{% if errores.ine %} is-invalid{% endif %}"
+                       type="file" id="ine" name="ine"
+                       accept="image/*,application/pdf" required
+                       {% if errores.ine %}aria-invalid="true"{% endif %}
+                       aria-describedby="ayuda-ine error-ine">
+
+                {# Indica los formatos aceptados y el propósito del archivo #}
+                <p class="text-sm campo__ayuda" id="ayuda-ine">
+                    Sube una foto nítida o un PDF de tu INE. Sirve para verificar tu cuenta.
+                </p>
+
+                {# Muestra el error del archivo cuando existe #}
+                <p class="text-sm campo__error" id="error-ine"
+                   {% if not errores.ine %}hidden{% endif %}>{{ errores.ine }}</p>
+            </div>
+
+            {# Casilla para aceptar los términos y el aviso de privacidad #}
+            <div class="campo">
+                <label class="casilla" for="terminos">
+                    <input class="casilla__control"
+                           type="checkbox" id="terminos" name="terminos" value="1" required
+                           {% if errores.terminos %}aria-invalid="true"{% endif %}
+                           aria-describedby="error-terminos">
+
+                    <span class="text-sm casilla__texto">
+                        Acepto los <a href="#" class="enlace">términos de uso</a> y el
+                        <a href="#" class="enlace">aviso de privacidad</a>.
+                    </span>
+                </label>
+
+                {# Muestra el error si no se aceptaron los términos #}
+                <p class="text-sm campo__error" id="error-terminos"
+                   {% if not errores.terminos %}hidden{% endif %}>{{ errores.terminos }}</p>
+            </div>
+
+            {# Envía los datos para crear la cuenta #}
+            <button type="submit"
+                    class="btn btn--principal btn--lg ui-button formulario__enviar">
+                Crear mi cuenta
+            </button>
+        </form>
+    </section>
+
+    {# Ofrece un enlace a quienes ya tienen una cuenta #}
+    <p class="text-base cuenta__pie">
+        ¿Ya tienes cuenta?
+        <a class="enlace" href="{% url 'cuentas:login' %}">Inicia sesión</a>
+    </p>
+
+</div>
+{% endblock %}
