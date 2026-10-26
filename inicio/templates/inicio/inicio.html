@@ -3,18 +3,61 @@
 {% block title %}Inicio | Rishine{% endblock %}
 
 {% block extra_css %}
-
+    <link rel="stylesheet" href="{% static 'inicio/css/inicio.css' %}">
 {% endblock %}
 
 {% block contenido %}
-    <div class="contenido">
+    <div class="bienvenido">
+        <h1>BIENVENIDO</h1>
+        <p class="text-base">Descubre eventos cerca de ti</p>
+    </div>
 
-        <div>
-            <h1>BIENVENIDO</h1>
-            <p class="text-base">Descubre eventos cerca de ti</p>
+    <!--  Sección para Ti-->
+    <section class="seccion-para-ti">
+        <div class="seccion-header">
+            <h2>Para Ti</h2>
+            <a href="#" class="link-ver-todos text-sm">Ver todos</a>
         </div>
+        <div class="catalogo-de-eventos">
+            <!-- Inserta cards de eventos -->
+            {% for evento in eventos_para_ti %}
+                {% include 'tarjeta_evento.html' %} <!-- Inserta la estructura html de las cards -->
+            <!-- Muestra mensaje si no existe un evento-->
+            {% empty %}<p class="aviso-sin-eventos">No hay eventos por ahora</p>{% endfor %}
+        </div>
+    </section>
 
-        <!-- --!>
+    <!-- Muestra eventos en menos de $500 -->
+    <section class="seccion-menos-de-500">
+       <div class="seccion-header">
+           <h2>En menos de $500</h2>
+           <a href="#" class="link-ver-todos text-sm">Ver todos</a>
+       </div>
+        <div class="catalogo-de-eventos">
+            {% for evento in eventos_500 %}
+                {% include 'tarjeta_evento.html' %}
+            {% empty %}<p class="aviso-sin-eventos">No hay eventos por ahora</p>{% endfor %}
+        </div>
+    </section>
+
+    <!-- Muestra eventos en menos de $200 -->
+    <section class="seccion-menos-de-200">
+       <div class="seccion-header">
+           <h2>En menos de $200</h2>
+           <a href="#" class="link-ver-todos text-sm">Ver todos</a>
+       </div>
+        <div class="catalogo-de-eventos">
+            {% for evento in eventos_200 %}
+                {% include 'tarjeta_evento.html' %}
+            {% empty %}<p class="aviso-sin-eventos">No hay eventos por ahora</p>{% endfor %}
+        </div>
+    </section>
+
+
+    <!-- Banner CTA -->
+    <div class="banner-cta">
+        <p class="text-lg"><span>¿Quieres crear tus propios eventos?</span></p>
+        <a href="#" class="btn-crear ui-button">Crear Evento</a>
     </div>
 {% endblock %}
 

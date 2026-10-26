@@ -2,7 +2,6 @@
     box-sizing: border-box;
 }
 
-
 :root {
     /* MARCA */
     --color-primary: #4F46E5;
@@ -193,8 +192,11 @@ h4{
 }
 
 
-
-
+header{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
 
 
 
