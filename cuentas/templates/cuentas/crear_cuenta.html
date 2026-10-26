@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cuentas/css/crear_cuenta.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<div class="cuenta">
+
+    {% comment %}
+    ALERTAS DEL SISTEMA
+    Guía §6 Alertas: arriba del contenido, máximo dos, y empiezan con la
+    palabra del estado para no depender solo del color.
+    {% endcomment %}
+    {% if messages %}
+    <div class="cuenta__alertas">
+        {% for message in messages %}
+            {% if forloop.counter <= 2 %}
+            <div class="alerta alerta--{{ message.level_tag }}" role="{% if message.level_tag == 'error' %}alert{% else %}status{% endif %}">
+                <strong>{% if message.level_tag == 'success' %}Listo.{% elif message.level_tag == 'warning' %}Atención.{% elif message.level_tag == 'error' %}Error.{% else %}Aviso.{% endif %}</strong>
+                {{ message }}
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% comment %}
+    ENCABEZADO
+    Un solo h1 por página. Eyebrow en mayúsculas (CSS), título sin
+    signos de exclamación y párrafo corto en text-lg (máx. 68 caracteres).
+    {% endcomment %}
+    <header class="cuenta__encabezado">
+        <p class="ui-eyebrow cuenta__eyebrow">Cuenta de usuario</p>
+        <h1 class="cuenta__titulo">Crea tu cuenta</h1>
+        <p class="text-lg cuenta__intro">
+            Regístrate para encontrar talleres, concursos, clubes y conferencias en Guadalajara.
+        </p>
+    </header>
+
+    {% comment %}
+    TARJETA DEL FORMULARIO
+    Guía §6 Tarjeta + Formularios: bg-surface, borde, radius-lg, space-5.
+    Una sola tarjeta (nunca una tarjeta dentro de otra).
+    Sin JS el navegador valida con los atributos required/type/minlength;
+    con JS se activan los mensajes propios (crear_cuenta.js).
+    {% endcomment %}
+    <section class="tarjeta" aria-labelledby="titulo-formulario">
+        <h2 id="titulo-formulario" class="cuenta__subtitulo">Tus datos</h2>
+
+        <form class="formulario" id="form-crear-cuenta" method="post" action="" data-crear-cuenta>
+            {% csrf_token %}
+
+            {#  Nombre y apellidos: dos columnas desde tableta  #}
+            <div class="formulario__fila">
+                <div class="campo">
+                    <label class="ui-label campo__etiqueta" for="nombre">Nombre</label>
+                    <input class="campo__control{% if errores.nombre %} is-invalid{% endif %}"
+                           type="text" id="nombre" name="nombre"
+                           value="{{ valores.nombre|default:'' }}"
+                           placeholder="Ej. Mariana" autocomplete="given-name" required
+                           {% if errores.nombre %}aria-invalid="true"{% endif %}
+                           aria-describedby="error-nombre">
+                    <p class="text-sm campo__error" id="error-nombre" {% if not errores.nombre %}hidden{% endif %}>{{ errores.nombre }}</p>
+                </div>
+
+                <div class="campo">
+                    <label class="ui-label campo__etiqueta" for="apellidos">Apellidos</label>
+                    <input class="campo__control{% if errores.apellidos %} is-invalid{% endif %}"
+                           type="text" id="apellidos" name="apellidos"
+                           value="{{ valores.apellidos|default:'' }}"
+                           placeholder="Ej. López Ramírez" autocomplete="family-name" required
+                           {% if errores.apellidos %}aria-invalid="true"{% endif %}
+                           aria-describedby="error-apellidos">
+                    <p class="text-sm campo__error" id="error-apellidos" {% if not errores.apellidos %}hidden{% endif %}>{{ errores.apellidos }}</p>
+                </div>
+            </div>
+
+            {#  Correo  #}
+            <div class="campo">
+                <label class="ui-label campo__etiqueta" for="correo">Correo electrónico</label>
+                <input class="campo__control{% if errores.correo %} is-invalid{% endif %}"
+                       type="email" id="correo" name="correo"
+                       value="{{ valores.correo|default:'' }}"
+                       placeholder="tucorreo@ejemplo.com" autocomplete="email" required
+                       {% if errores.correo %}aria-invalid="true"{% endif %}
+                       aria-describedby="ayuda-correo error-correo">
+                <p class="text-sm campo__ayuda" id="ayuda-correo">Lo usarás para iniciar sesión y recibir avisos de tus eventos.</p>
+                <p class="text-sm campo__error" id="error-correo" {% if not errores.correo %}hidden{% endif %}>{{ errores.correo }}</p>
+            </div>
+
+            {#  Fecha de nacimiento  #}
+            <div class="campo">
+                <label class="ui-label campo__etiqueta" for="fecha_nacimiento">Fecha de nacimiento</label>
+                <input class="campo__control{% if errores.fecha_nacimiento %} is-invalid{% endif %}"
+                       type="date" id="fecha_nacimiento" name="fecha_nacimiento"
+                       value="{{ valores.fecha_nacimiento|default:'' }}"
+                       autocomplete="bday" required
+                       {% if errores.fecha_nacimiento %}aria-invalid="true"{% endif %}
+                       aria-describedby="ayuda-fecha_nacimiento error-fecha_nacimiento">
+                <p class="text-sm campo__ayuda" id="ayuda-fecha_nacimiento">Rishine es para jóvenes de 15 a 29 años.</p>
+                <p class="text-sm campo__error" id="error-fecha_nacimiento" {% if not errores.fecha_nacimiento %}hidden{% endif %}>{{ errores.fecha_nacimiento }}</p>
+            </div>
+
+            {#  Contraseñas: dos columnas desde tableta  #}
+            <div class="formulario__fila">
+                <div class="campo">
+                    <label class="ui-label campo__etiqueta" for="contrasena">Contraseña</label>
+                    <div class="campo__grupo">
+                        <input class="campo__control{% if errores.contrasena %} is-invalid{% endif %}"
+                               type="password" id="contrasena" name="contrasena"
+                               minlength="8" autocomplete="new-password" required
+                               {% if errores.contrasena %}aria-invalid="true"{% endif %}
+                               aria-describedby="ayuda-contrasena error-contrasena">
+                        {# type="button" para que no envíe el formulario; el JS alterna el tipo #}
+                        <button type="button" class="btn btn--fantasma btn--sm campo__mostrar"
+                                data-mostrar-contrasena="contrasena" aria-pressed="false"
+                                aria-label="Mostrar contraseña" hidden>Mostrar</button>
+                    </div>
+                    <p class="text-sm campo__ayuda" id="ayuda-contrasena">Usa al menos 8 caracteres.</p>
+                    <p class="text-sm campo__error" id="error-contrasena" {% if not errores.contrasena %}hidden{% endif %}>{{ errores.contrasena }}</p>
+                </div>
+
+                <div class="campo">
+                    <label class="ui-label campo__etiqueta" for="contrasena2">Confirma tu contraseña</label>
+                    <div class="campo__grupo">
+                        <input class="campo__control{% if errores.contrasena2 %} is-invalid{% endif %}"
+                               type="password" id="contrasena2" name="contrasena2"
+                               minlength="8" autocomplete="new-password" required
+                               {% if errores.contrasena2 %}aria-invalid="true"{% endif %}
+                               aria-describedby="error-contrasena2">
+                        <button type="button" class="btn btn--fantasma btn--sm campo__mostrar"
+                                data-mostrar-contrasena="contrasena2" aria-pressed="false"
+                                aria-label="Mostrar confirmación de contraseña" hidden>Mostrar</button>
+                    </div>
+                    <p class="text-sm campo__error" id="error-contrasena2" {% if not errores.contrasena2 %}hidden{% endif %}>{{ errores.contrasena2 }}</p>
+                </div>
+            </div>
+
+            {#  Términos (checkbox con radius-sm)  #}
+            <div class="campo">
+                <label class="casilla" for="terminos">
+                    <input class="casilla__control" type="checkbox" id="terminos" name="terminos" value="1" required
+                           {% if errores.terminos %}aria-invalid="true"{% endif %}
+                           aria-describedby="error-terminos">
+                    <span class="text-sm casilla__texto">
+                        Acepto los <a href="#" class="enlace">términos de uso</a> y el
+                        <a href="#" class="enlace">aviso de privacidad</a>.
+                    </span>
+                </label>
+                <p class="text-sm campo__error" id="error-terminos" {% if not errores.terminos %}hidden{% endif %}>{{ errores.terminos }}</p>
+            </div>
+
+            {#  Acción principal: la única de la pantalla; ancho completo en celular  #}
+            <button type="submit" class="btn btn--principal btn--lg ui-button formulario__enviar">Crear mi cuenta</button>
+        </form>
+    </section>
+
+    {% comment %}
+    ENLACE SECUNDARIO: ya tengo cuenta
+    {% endcomment %}
+    <p class="text-base cuenta__pie">
+        ¿Ya tienes cuenta?
+        <a class="enlace" href="{% url 'cuentas:login' %}">Inicia sesión</a>
+    </p>
+
+</div>
+{% endblock %}
+
+{% comment %} Script propio de esta pantalla (mejora; el formulario funciona sin él). {% endcomment %}
+{% block extra_js %}
+    <script src="{% static 'cuentas/js/crear_cuenta.js' %}" defer></script>
+{% endblock %}

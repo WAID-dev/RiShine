@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Iniciar sesión{% endblock %}
+
+{% block extra_css %}
+<!-- Carga los estilos propios de la pantalla de inicio de sesión. -->
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<!-- Contenedor principal del formulario. -->
+<section class="login">
+    <h1 class="login__titulo">Iniciar sesión</h1>
+
+    <!-- Muestra los mensajes enviados desde Django. -->
+    {% for message in messages %}
+    <p class="login__alerta login__alerta--{{ message.tags }}">{{ message }}</p>
+    {% endfor %}
+
+    <!-- Envía los datos del usuario a la vista de inicio de sesión. -->
+    <form method="post" action="{% url 'cuentas:login' %}">
+        {% csrf_token %}
+        <!-- Guarda la dirección a la que se regresará después del inicio de sesión. -->
+        <input type="hidden" name="next" value="{{ request.GET.next|default:'/' }}">
+
+        <!-- Campo para ingresar el nombre de usuario. -->
+        <div class="login__campo">
+            <label for="username">Nombre de usuario</label>
+            <input type="text" id="username" name="username" autocomplete="username" required>
+        </div>
+
+        <!-- Campo para ingresar la contraseña. -->
+        <div class="login__campo">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" autocomplete="current-password" required>
+        </div>
+
+        <!-- Envía el formulario para iniciar sesión. -->
+        <button type="submit" class="login__boton">Iniciar sesión</button>
+    </form>
+
+    <!-- Enlace para crear una cuenta nueva. -->
+    <p class="login__registro">¿No tienes cuenta? <a href="{% url 'cuentas:registro' %}">Crear cuenta</a></p>
+</section>
+{% endblock %}

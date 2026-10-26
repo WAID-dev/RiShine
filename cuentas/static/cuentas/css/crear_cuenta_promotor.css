@@ -1,0 +1,33 @@
+/* Ajusta el espacio interno del campo para subir archivos */
+.cuenta .campo__control[type="file"] {
+    padding: var(--space-2) var(--space-3);
+    cursor: pointer;
+}
+
+/* Personaliza el boton que permite seleccionar un archivo */
+.cuenta .campo__control[type="file"]::file-selector-button {
+    min-height: var(--alto-control-sm);
+    margin-right: var(--space-3);
+    padding: 0 var(--space-4);
+    background-color: var(--bg-subtle);
+    color: var(--color-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--duracion);
+}
+
+/* Cambia el fondo del boton cuando el cursor pasa sobre el */
+.cuenta .campo__control[type="file"]::file-selector-button:hover {
+    background-color: var(--color-primary-soft);
+}
+
+/* Desactiva la transición si el usuario prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+    .cuenta .campo__control[type="file"]::file-selector-button {
+        transition: none;
+    }
+}
