@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'usuarios/css/perfil.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+<h1 style="text-align: center; margin-top: 0px;">Perfil</h1>
+<section id="contenedorPerfilGeneral">
+
+    <!-- Sirve para que el boton no se mueva de abajo de contenedorFormulario-->
+    <section id="contenedorFormulario1">
+
+        <!-- contenedorFormulario sirve para almacenar todas las entradas y salidas del perfil-->
+        <section id="contenedorFormulario">
+                <form id="formPerfil">
+                <div class="campo">
+                    <label for="nombreUsuario" class="text-base textFormulario">Nombre usuario</label>
+                    <input type="text" id="nombreUsuario" name="nombreUsuario">
+                </div>
+                <div class="campo">
+                    <label for="nombre" class="text-base textFormulario">Nombre</label>
+                    <input type="text" id="nombre" name="nombre">
+                </div>
+                <div class="campo">
+                    <label for="apellido" class="text-base textFormulario">Apellido</label>
+                    <input type="text" id="apellido" name="apellido">
+                </div>
+                <div class="campo">
+                    <label for="correo" class="text-base textFormulario">Correo</label>
+                    <input type="email" id="correo" name="correo">
+                </div>
+                <div class="campo">
+                    <label for="ciudad" class="text-base textFormulario">Ciudad</label>
+                    <input type="text" id="ciudad" name="ciudad">
+                </div>
+                <div class="campo">
+                    <label for="fecha_de_nacimiento" class="text-base textFormulario">Fecha de nacimiento</label>
+                    <input type="date" id="fecha_de_nacimiento" name="fecha_de_nacimiento">
+                </div>
+                </form>
+        </section>
+
+        <section id="btnModificarDatos">
+            <button class="ui-button botones-perfil" style="margin-left: 30px;" form="formPerfil">Modificar</button>
+            <button class="ui-button botones-perfil" style="margin-left: 30px;" form="formPerfil">Guardar cambios</button>
+        </section>
+
+    </section>
+
+        <section id="panelFavoritos">
+            <form>
+                <button class="btnFavoritos"> Favoritos</button>
+                <button class="btnFavoritos"> Eventos guardados</button>
+            </form>
+        </section>
+
+    <section id="opcionesAvanzadas">
+                <form>
+                <h4>Opciones Avanzadas</h4>
+                <button type="submit" class="botones-perfil">Cerrar sesión</button>
+                <button type="submit" class="botones-perfil">Eliminar cuenta</button>
+                </form>
+    </section>
+
+</section>
+
+{% endblock %}
