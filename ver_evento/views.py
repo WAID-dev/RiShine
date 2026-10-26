@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def ver_evento(request):
+    return render(request, 'ver_evento/ver_evento.html')

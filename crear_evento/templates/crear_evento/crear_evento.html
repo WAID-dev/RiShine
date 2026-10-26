@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Formulario Crear Evento | RiShine{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'crear_evento/crear_evento.css' %}">
+{% endblock %}
+
+{% block contenido %}
+    {% if messages %}
+        {% for message in messages %}
+            <script>alert("{{ message }}");</script>
+        {% endfor %}
+    {% endif %}
+
+    <h1>Crear evento</h1>
+    <main>
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <h2>Información básica</h2>
+        
+        <p>Imagen del evento:</p>
+        <label for="boton-oculto" id="boton-imagen" class="ui-button">Seleccionar imagen</label>
+        <input id="boton-oculto" type="file" name="imagen">
+
+        <p>Nombre del evento*:</p>
+        <input class="input-campo text-base" type="text" name="titulo" placeholder="TechDay 2026" required>
+
+        <p>Categoría*:</p>
+        <select name="categoria" class="input-campo text-base" required>
+            {% for cat in categorias %}
+            <option value="{{ cat.id_categoria }}">{{ cat.nombre_categoria }}</option>
+            {% endfor %}
+        </select>
+
+        <p>Descripción*:</p>
+        <textarea name="descripcion" class="input-campo text-base" placeholder="Ingrese una breve descripción" required></textarea>
+
+        <p>Cupo*:</p>
+        <input class="input-campo text-base" type="number" name="cupo" min="0" required>
+
+        <p>Costo*:</p>
+        <input class="input-campo text-base" type="number" name="costo" min="0" required>
+
+        <h2>Información de la dirección</h2>
+        
+
+        <p>Modo*:</p>
+        <select name="modo" class="input-campo text-base" required>
+            <option value="Presencial">Presencial</option>
+            <option value="Virtual">Virtual</option>
+        </select>
+
+        <p>Dirección*:</p>
+        <input type="text" name="direccion" class="input-campo text-base" placeholder="Ej: Av. Vallarta 1234, Col. Americana, Guadalajara" required>
+
+        <p>Referencias:</p>
+        <textarea name="referencias" class="input-campo text-base" placeholder="Ej: Frente al parque, edificio azul"></textarea>
+
+        <p>URL del evento*:</p>
+        <input type="url" name="url_evento" class="input-campo text-base" placeholder="Ej: https://www.ejemplo.com/evento" required>
+
+        <h2>Información de fechas</h2>
+        
+        <p>¿Es un evento de un solo día o de varios?</p>
+        <input type="radio" id="un_dia" name="tipo_evento" value="un_dia" checked>
+        <label for="un_dia">Un solo día</label>
+        <input type="radio" id="varios_dias" name="tipo_evento" value="varios_dias">
+        <label for="varios_dias">Varios días</label>
+
+        <p>Fecha de inicio*:</p>
+        <input class="input-campo text-base" type="date" name="fecha_inicio" required>
+
+        <p>Fecha de fin*:</p>
+        <input class="input-campo text-base" type="date" name="fecha_fin" required>
+
+            <h2>Dias del evento</h2>
+            {% for horario in horarios %}
+            <div>
+                <input type="checkbox" id="horario_{{ horario.id_horario }}"
+                name="horarios" value="{{ horario.id_horario }}">
+                <label for="horario_{{ horario.id_horario }}">{{ horario.dia }}</label>
+            </div>
+            {% endfor %}
+
+            <h2>Contacto</h2>
+            <p>Escriba un contacto (teléfono, e-mail, etc.)</p>
+            <input type="text" name="contacto" class="input-campo text-base" placeholder="Ej: 555-1234 u organizador@ejemplo.com">
+
+        <br><br>
+        <button id="boton-publicar" class="ui-button" type="submit" name="accion" value="publicado">Publique su evento</button>
+        <button id="boton-borrador" class="ui-button" type="submit" name="accion" value="borrador">Guarde su borrador</button>
+        <button id="boton-cancelar" class="ui-button"><a id="link-cancelar">Cancelar</a></button>
+        </form>
+    </main>
+    <footer>
+        <p><small>*: Información obligatoria</small></p>
+    </footer>
+{% endblock %}
