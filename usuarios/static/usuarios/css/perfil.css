@@ -1,0 +1,173 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/*contenedor padre */
+#contenedorPerfilGeneral {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 24px;
+  background-color: var(--color-primary-deep);
+  border-radius: 25px;
+}
+
+/* columna del formulario */
+#contenedorFormulario1 {
+  flex: 2 1 340px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#contenedorFormulario {
+  padding: 24px;
+  background-color: var(--color-primary);
+  border-radius: 40px;
+}
+
+#formPerfil {
+  display: contents;
+}
+
+.campo {
+  display: grid;
+  grid-template-columns: minmax(120px, 200px) 1fr;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.textFormulario {
+  color: aliceblue;
+}
+
+.campo input {
+  width: 100%;
+  max-width: 320px;
+  min-width: 0;
+  padding: 8px 14px;
+  border: 2px solid transparent;
+  border-radius: 25px;
+  font-family: inherit;
+  font-size: 15px;
+}
+
+
+/* botones modificar y guardar */
+#btnModificarDatos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.botones-perfil {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 25px;
+  background-color: var(--color-primary-active);
+  color: aliceblue;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+
+.botones-perfil:hover {
+  filter: brightness(1.25);
+}
+
+.botones-perfil:focus-visible {
+  outline: 3px solid aliceblue;
+  outline-offset: 2px;
+}
+
+/* seccion favoritos */
+#panelFavoritos {
+  flex: 1 1 240px;
+  min-width: 0;
+  padding: 40px 20px 20px;
+  background-color: var(--color-primary);
+  border-radius: 40px;
+  text-align: center;
+}
+
+#panelFavoritos form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.btnFavoritos {
+  width: 100%;
+  padding: 25px;
+  border: none;
+  border-radius: 8px;
+  background-color: aliceblue;
+  color: var(--color-primary-active);
+  font-family: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.btnFavoritos:hover {
+  transform: translateY(-2px);
+}
+
+/* OPCIONES AVANZADAS (fila completa)  */
+#opcionesAvanzadas {
+  flex: 1 1 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 20px;
+  background-color: var(--color-primary-active);
+  border-radius: 25px;
+  color: aliceblue;
+}
+
+#opcionesAvanzadas form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+#opcionesAvanzadas h4 {
+  flex: 1 1 100%;
+  margin: 0 0 4px;
+  font-size: 1.5rem;
+}
+
+#opcionesAvanzadas .botones-perfil {
+  background-color: var(--color-primary);
+}
+
+#opcionesAvanzadas .botones-perfil:last-of-type {
+  background-color: transparent;
+  border: 2px solid #ef4444;
+  color: #fca5a5;
+}
+
+#opcionesAvanzadas .botones-perfil:last-of-type:hover {
+  background-color: #ef4444;
+  color: white;
+}
+
+/* Ajuestes para celular */
+@media (max-width: 480px) {
+  #contenedorPerfilGeneral {
+    padding: 16px;
+  }
+
+  .campo {
+    grid-template-columns: 1fr;   /* esto pone la etiqueta arriba, input abajo */
+    gap: 6px;
+  }
+
+  .campo input {
+    max-width: 100%;
+  }
+}
