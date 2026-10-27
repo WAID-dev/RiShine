@@ -1,5 +1,5 @@
 <!-- plantilla de las tagetas de los eventos -->
-<a href="#" class="evento-card">
+<a href="{% url 'ver_evento:ver_evento' %}" class="evento-card">
     <div class="evento-imagen">
         {% if evento.imagen %}
             <img src="{{ evento.imagen.url }}" alt="{{ evento.titulo }}">
