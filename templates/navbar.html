@@ -1,8 +1,8 @@
 <nav class="navbar">
     <ul class="lista-elementos">
-        <li><a class="logo" href="/">RISHINE</a></li>
+        <li><a class="logo" href="{% url 'inicio:inicio' %}">RISHINE</a></li>
         <li>
-            <form action="/search" method="GET" class="buscador-nav">
+            <form action="{% url 'inicio:inicio' %}" method="GET" class="buscador-nav">
                 <!-- Imagen SVG de una lupa-->
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -10,9 +10,9 @@
                 <input type="search" name="busqueda" placeholder="Buscar eventos..." class="text-sm">
             </form>
         </li>
-        <li><a class="crear-evento ui-button" href="/">Crear Evento</a></li>
+        <li><a class="crear-evento ui-button" href="{% url 'crear_evento:crear_evento' %}">Crear evento</a></li>
         <li>
-            <a href="/" aria-label="Ir a perfil" class="nav-perfil">
+            <a href="{% url 'usuarios:perfil' %}" aria-label="Ir a perfil" class="nav-perfil">
                 <!-- Imagen SVG de Icono perfil -->
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -21,6 +21,4 @@
             </a>
         </li>
     </ul>
-
-
 </nav>
