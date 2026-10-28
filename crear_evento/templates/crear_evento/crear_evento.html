@@ -4,7 +4,7 @@
 {% block title %}Formulario Crear Evento | RiShine{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'crear_evento/crear_evento.css' %}">
+<link rel="stylesheet" href="{% static 'crear_evento/css/crear_evento.css' %}">
 {% endblock %}
 
 {% block contenido %}
@@ -16,7 +16,7 @@
 
     <h1>Crear evento</h1>
     <main>
-        <form method="post" enctype="multipart/form-data">
+        <form class="fomulario-crear-evento" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         <h2>Información básica</h2>
@@ -76,7 +76,6 @@
         <p>Fecha de fin*:</p>
         <input class="input-campo text-base" type="date" name="fecha_fin" required>
 
-            <h2>Dias del evento</h2>
             {% for horario in horarios %}
             <div>
                 <input type="checkbox" id="horario_{{ horario.id_horario }}"
@@ -86,12 +85,12 @@
             {% endfor %}
 
             <h2>Contacto</h2>
-            <p>Escriba un contacto (teléfono, e-mail, etc.)</p>
+            <p>Escriba un correo de contacto</p>
             <input type="text" name="contacto" class="input-campo text-base" placeholder="Ej: 555-1234 u organizador@ejemplo.com">
 
         <br><br>
-        <button id="boton-publicar" class="ui-button" type="submit" name="accion" value="publicado">Publique su evento</button>
-        <button id="boton-borrador" class="ui-button" type="submit" name="accion" value="borrador">Guarde su borrador</button>
+        <button id="boton-publicar" class="ui-button" type="submit" name="accion" value="publicado">Publicar evento</button>
+        <button id="boton-borrador" class="ui-button" type="submit" name="accion" value="borrador">Guardar borrador</button>
         <button id="boton-cancelar" class="ui-button"><a id="link-cancelar">Cancelar</a></button>
         </form>
     </main>
