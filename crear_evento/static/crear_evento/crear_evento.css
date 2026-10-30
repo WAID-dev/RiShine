@@ -1,0 +1,136 @@
+main  {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    text-align: left;     
+}
+
+form {
+    width: 720px;
+}
+
+#boton-oculto {
+    display: none;
+}
+
+#panelInformacionBasica{
+    background-color: var(--color-primary);
+    margin: 15px;
+    padding: 25px;
+    border-radius: 15px;
+    color: aliceblue;
+}
+
+#panelInformacionDireccion{
+    background-color: var(--color-mint-strong);
+    margin: 15px;
+    padding: 25px;
+    border-radius: 15px;
+    color: aliceblue;
+}
+
+#panelInformacionFechas{
+    background-color: var(--color-amber);
+    margin: 15px;
+    padding: 25px;
+    border-radius: 15px;
+    color: aliceblue;
+}
+
+#panelInformacionContacto{
+    background-color: var(--color-primary);
+    margin: 15px;
+    padding: 25px;
+    border-radius: 15px;
+    color: aliceblue;
+}
+
+#agregarImagen{
+    color: aliceblue;
+}
+
+#boton-imagen {
+    display: inline-block;
+    margin-bottom: 24px;
+    padding: 12px 24px;
+    color: var(--color-primary-deep);
+    background-color: var(--text-on-inverse);
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 180ms, color 180ms;
+}
+
+#boton-imagen:hover {
+    background-color: var(--color-amber);
+    color: var(--bg-page);
+}
+
+#boton-imagen:active {
+    transform: scale(0.98);
+}
+
+
+#descripcion {
+    width: 500px;
+    height: 100px;
+    padding-top: 0;
+
+}
+
+.input-campo {
+    margin-bottom: 24px;
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    padding: 12px 8px;
+    width: 100%;
+}
+
+#boton-publicar {
+    padding: 12px 24px;
+    background-color: var(--color-amber);
+    color: var(--color-primary-deep);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 180ms;
+}
+
+#boton-publicar:hover {
+    background-color: var(--color-amber-hover);
+}
+
+#boton-borrador {
+    background-color: var(--bg-page);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 180ms;
+}
+
+#boton-borrador:hover {
+    background-color: var(--color-primary-soft);
+}
+
+#boton-cancelar {
+    background-color: var(--color-error);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 180ms;
+}
+
+#link-cancelar {
+    color: var(--bg-page);
+    text-decoration: none;
+}
+
+footer {
+    display: block;
+    width: 65%;
+    text-align: left;
+    padding-left: 20px;
+}

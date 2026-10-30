@@ -1,0 +1,225 @@
+body{
+    background-color: var(--color-primary-active);
+}
+
+#panelGeneralEvento{
+    margin: -15px;
+    padding: 5px;
+    border-radius: 15px;
+    background-color: var(--color-primary-soft);
+}
+
+#panelTitulo{
+    display: flex;              
+    flex-direction: row;        
+    justify-content: left;   
+    align-items: center;        
+    flex-wrap: wrap;           
+    gap: 400px; 
+}
+
+#panelCategoria{
+    display: flex;              
+    flex-direction: row;        
+    justify-content: left;   
+    align-items: center;        
+    flex-wrap: wrap;           
+    gap: 45px; 
+    background-color: var(--color-primary-deep);
+    color: aliceblue;
+    padding: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 15px;
+}
+
+#tituloEimagen{
+    display: flex;              
+    flex-direction: row;        
+    justify-content: left;   
+    align-items: center;        
+    flex-wrap: wrap;           
+    gap: 10px; 
+    margin-bottom: 40px;  
+}
+
+#botonesAcciones{
+    margin: 25px;
+    padding: 85px;
+    display: flex;              
+    flex-direction: column;    
+    justify-content: left;    
+    align-items: center;       
+    flex-wrap: wrap;         
+    gap: 10px;    
+    background-color: var(--color-amber);
+    border-radius: 15px;
+}
+
+#boton-guardar {
+    padding: 12px 24px;
+    width: 250px;
+    background-color: var(--color-primary);
+    border: none;
+    color: var(--bg-surface);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 180ms;
+}
+#boton-guardar:hover {
+    background-color: var(--color-primary-hover);
+}
+
+#boton-like {
+    background-color: var(--bg-surface);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    padding: 12px 24px;
+    width: 250px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 180ms;
+}
+
+#boton-like:hover {
+    background-color: var(--color-primary-soft);
+}
+#event-img {
+    flex: 0 0 55%;
+}
+
+#event-img img {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#seccionMiniInfo{
+    display: flex;              /* activa flexbox */
+    flex-direction: row;        /* dirección del eje principal */
+    justify-content: left;    /* alinea en el eje principal */
+    align-items: center;        /* alinea en el eje transversal */
+    flex-wrap: wrap;            /* permite que bajen a otra línea */
+    gap: 10px;  
+}
+
+#cupo {
+    margin: 20px;
+    background-color: var(--bg-page);
+    padding: 24px;
+    border-radius: 10px;
+}
+
+#costo {
+    margin: 20px;
+    background-color: var(--bg-page);
+    padding: 24px 80px;
+    border-radius: 10px;
+}
+
+#fecha{
+    margin: 20px;
+    background-color: var(--bg-page);
+    padding: 24px 80px;
+    border-radius: 10px;
+}
+
+#dias{
+    margin: 20px;
+    background-color: var(--bg-page);
+    padding: 24px 80px;
+    border-radius: 10px;
+}
+
+#ubicacion{
+    margin: 20px;
+    background-color: var(--bg-page);
+    padding: 24px 80px;
+    border-radius: 10px;
+}
+
+#seccionDescripcion{
+    margin: 20px;
+    padding: 24px 80px;
+    background-color: var(--color-primary);
+    padding: 15px;
+    color: aliceblue;
+    border-radius: 10px;
+}
+
+
+/*Animacion de aparicion*/
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.visible {
+    opacity: 1;
+    transform: none;
+}
+
+
+
+
+@media (max-width: 768px) {
+
+    #panelGeneralEvento {
+        margin: 0;
+    }
+
+    #panelTitulo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    }
+    
+    #panelCategoria {
+    gap: 8px;
+    padding: 8px 14px;
+    margin-bottom: 15px;
+    width: fit-content;   /* que la etiqueta no ocupe todo el ancho */
+    max-width: 100%;
+    }
+
+    #panelCategoria h4,
+    #panelCategoria p {
+    margin: 0;
+    }
+
+    #tituloEimagen {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #event-img {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+
+    #botonesAcciones {
+        margin: 0;
+        padding: 20px;
+        align-items: stretch;
+    }
+
+    #boton-guardar,
+    #boton-like {
+        width: 100%;
+    }
+
+    #seccionMiniInfo {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #cupo,
+    #costo,
+    #fecha,
+    #dias,
+    #ubicacion {
+        margin: 10px 0;
+        padding: 16px;
+    }
+}
