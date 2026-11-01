@@ -4,8 +4,6 @@ from django.conf import settings
 from pathlib import Path
 import uuid
 
-
-
 # Create your models here.
 def ruta_foto_perfil(instance, filename):
     extension = Path(filename).suffix.lower()
@@ -83,24 +81,5 @@ class Guardado(models.Model):
 
     def __str__(self):
         return f"Guardado<u:{self.usuario_id}, e:{self.evento_id}>"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -45,14 +45,29 @@
 }
 
 .campo input {
-  width: 100%;
-  max-width: 320px;
-  min-width: 0;
-  padding: 8px 14px;
-  border: 2px solid transparent;
-  border-radius: 25px;
-  font-family: inherit;
-  font-size: 15px;
+    width: 100%;
+    max-width: 320px;
+    min-width: 0;
+    padding: 8px 14px;
+    border: 2px solid var(--border-strong, #ccc);
+    border-radius: 25px;
+    font-family: inherit;
+    font-size: 15px;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+}
+
+.campo input[readonly] {
+    background: var(--bg-surface);
+    color: var(--text-muted);
+    border-color: transparent;
+    cursor: default;
+}
+
+.campo input:focus {
+    border-color: var(--border-strong);
+    box-shadow: 0 0 0 3px rgba(56,25,50,0.07);
+    background: var(--bg-page);
 }
 
 
@@ -82,6 +97,10 @@
 .botones-perfil:focus-visible {
   outline: 3px solid aliceblue;
   outline-offset: 2px;
+}
+
+#btn-modificar-perfil.activo {
+    background-color: var(--text-secondary);
 }
 
 /* seccion favoritos */
@@ -119,20 +138,16 @@
 
 /* OPCIONES AVANZADAS (fila completa)  */
 #opcionesAvanzadas {
-  flex: 1 1 100%;
-  min-width: 0;
-  margin: 0;
-  padding: 20px;
-  background-color: var(--color-primary-active);
-  border-radius: 25px;
-  color: aliceblue;
-}
-
-#opcionesAvanzadas form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    flex: 1 1 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--color-primary-active);
+    border-radius: 25px;
+    color: aliceblue;
 }
 
 #opcionesAvanzadas h4 {
@@ -141,17 +156,17 @@
   font-size: 1.5rem;
 }
 
-#opcionesAvanzadas .botones-perfil {
+.btn-avanzado {
   background-color: var(--color-primary);
 }
 
-#opcionesAvanzadas .botones-perfil:last-of-type {
+.btn-eliminar:last-of-type {
   background-color: transparent;
   border: 2px solid #ef4444;
   color: #fca5a5;
 }
 
-#opcionesAvanzadas .botones-perfil:last-of-type:hover {
+.btn-eliminar:last-of-type:hover {
   background-color: #ef4444;
   color: white;
 }

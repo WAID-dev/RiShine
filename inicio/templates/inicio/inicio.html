@@ -4,6 +4,7 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'inicio/css/inicio.css' %}">
+    <link rel="stylesheet" href="{% static 'inicio/css/tarjeta_evento.css' %}">
 {% endblock %}
 
 {% block contenido %}
@@ -21,7 +22,7 @@
         <div class="catalogo-de-eventos">
             <!-- Inserta cards de eventos -->
             {% for evento in eventos_para_ti %}
-                {% include 'tarjeta_evento.html' %} <!-- Inserta la estructura html de las cards -->
+                {% include 'inicio/tarjeta_evento.html' %} <!-- Inserta la estructura html de las cards -->
             <!-- Muestra mensaje si no existe un evento-->
             {% empty %}<p class="aviso-sin-eventos">No hay eventos por ahora</p>{% endfor %}
         </div>
@@ -35,7 +36,7 @@
        </div>
         <div class="catalogo-de-eventos">
             {% for evento in eventos_500 %}
-                {% include 'tarjeta_evento.html' %}
+                {% include 'inicio/tarjeta_evento.html' %}
             {% empty %}<p class="aviso-sin-eventos">No hay eventos por ahora</p>{% endfor %}
         </div>
     </section>
@@ -48,7 +49,7 @@
        </div>
         <div class="catalogo-de-eventos">
             {% for evento in eventos_200 %}
-                {% include 'tarjeta_evento.html' %}
+                {% include 'inicio/tarjeta_evento.html' %}
             {% empty %}<p class="aviso-sin-eventos">No hay eventos por ahora</p>{% endfor %}
         </div>
     </section>

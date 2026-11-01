@@ -16,7 +16,7 @@ class UsuarioAdmin(UserAdmin):
     )
 
     add_fieldsets = UserAdmin.add_fieldsets + (
-        ('Datos extra', {'fields': ('email', 'fecha_de_nacimiento', 'ciudad', 'foto')}),
+        ('Datos extra', {'fields': ('first_name', 'last_name' ,'email', 'fecha_de_nacimiento', 'ciudad', 'foto')}),
     )
 
 @admin.register(Promotor)

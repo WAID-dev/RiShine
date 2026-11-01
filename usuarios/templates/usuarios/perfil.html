@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'usuarios/css/perfil.css' %}">
+    <link rel="stylesheet" href="{% static 'usuarios/css/perfil.css' %}">
 {% endblock %}
 
 {% block contenido %}
@@ -16,56 +16,68 @@
 
         <!-- contenedorFormulario sirve para almacenar todas las entradas y salidas del perfil-->
         <section id="contenedorFormulario">
-                <form id="formPerfil">
+                <form id="formPerfil" method="post" action="{% url 'usuarios:perfil' %}">
+                {% csrf_token %}
                 <div class="campo">
                     <label for="nombreUsuario" class="text-base textFormulario">Nombre usuario</label>
-                    <input type="text" id="nombreUsuario" name="nombreUsuario">
+                    <input type="text" id="nombreUsuario" name="nombreUsuario"  value="{{ usuario.username }}" readonly>
                 </div>
                 <div class="campo">
                     <label for="nombre" class="text-base textFormulario">Nombre</label>
-                    <input type="text" id="nombre" name="nombre">
+                    <input type="text" id="nombre" name="nombre" value="{{ usuario.first_name }}" readonly>
                 </div>
                 <div class="campo">
                     <label for="apellido" class="text-base textFormulario">Apellido</label>
-                    <input type="text" id="apellido" name="apellido">
+                    <input type="text" id="apellido" name="apellido" value="{{ usuario.last_name }}" readonly>
                 </div>
                 <div class="campo">
                     <label for="correo" class="text-base textFormulario">Correo</label>
-                    <input type="email" id="correo" name="correo">
+                    <input type="email" id="correo" name="correo" value="{{ usuario.email }}" readonly>
                 </div>
                 <div class="campo">
                     <label for="ciudad" class="text-base textFormulario">Ciudad</label>
-                    <input type="text" id="ciudad" name="ciudad">
+                    <input type="text" id="ciudad" name="ciudad" value="{{ usuario.ciudad }}" readonly>
                 </div>
                 <div class="campo">
                     <label for="fecha_de_nacimiento" class="text-base textFormulario">Fecha de nacimiento</label>
-                    <input type="date" id="fecha_de_nacimiento" name="fecha_de_nacimiento">
+                    <input type="date" id="fecha_de_nacimiento" name="fecha_de_nacimiento" value="{{ usuario.fecha_de_nacimiento|date:'Y-m-d' }}" readonly>
                 </div>
                 </form>
         </section>
 
         <section id="btnModificarDatos">
-            <button class="ui-button botones-perfil" style="margin-left: 30px;" form="formPerfil">Modificar</button>
-            <button class="ui-button botones-perfil" style="margin-left: 30px;" form="formPerfil">Guardar cambios</button>
+            <button type="button" class="ui-button botones-perfil" id="btn-modificar-perfil" style="margin-left: 30px;">Modificar</button>
+            <button type="submit" class="ui-button botones-perfil" id="btn-guardar-perfil" style="margin-left: 30px;" form="formPerfil">Guardar cambios</button>
         </section>
 
     </section>
 
-        <section id="panelFavoritos">
-            <form>
-                <button class="btnFavoritos"> Favoritos</button>
-                <button class="btnFavoritos"> Eventos guardados</button>
-            </form>
-        </section>
+    <section id="panelFavoritos">
+        <form>
+            {% csrf_token %}
+            <button class="btnFavoritos"> Favoritos</button>
+            <button class="btnFavoritos"> Eventos guardados</button>
+        </form>
+    </section>
 
     <section id="opcionesAvanzadas">
-                <form>
-                <h4>Opciones Avanzadas</h4>
-                <button type="submit" class="botones-perfil">Cerrar sesión</button>
-                <button type="submit" class="botones-perfil">Eliminar cuenta</button>
-                </form>
+        <h4>Opciones Avanzadas</h4>
+        <form action="{% url 'usuarios:logout' %}" method="post" >
+            {% csrf_token %}
+            <button type="submit" class="botones-perfil btn-avanzado">Cerrar sesión</button>
+        </form>
+
+        <form action="{% url 'usuarios:eliminar_cuenta' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="botones-perfil btn-avanzado btn-eliminar">Eliminar cuenta</button>
+        </form>
     </section>
 
 </section>
+
+{% block extra_js %}
+    <script src="{% static 'usuarios/js/perfil.js' %}"></script>
+{% endblock %}
+
 
 {% endblock %}

@@ -11,3 +11,5 @@ def registro_vista(request):
 
 def registro_promotor_vista(request):
     return render(request, 'cuentas/crear_cuenta_promotor.html')
+
+
