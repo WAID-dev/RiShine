@@ -1,0 +1,243 @@
+/* ============================================================================
+   RISHINE · CUENTAS · Ventana emergente (modal)
+   ============================================================================
+   Archivo : cuentas/static/cuentas/css/cuentas_modal.css
+   Lo carga cuentas_modal.js (atributo data-css del <script>); no hace falta
+   enlazarlo en los templates.
+
+   QUÉ HAY AQUÍ
+   1. Tokens de la ventana
+   2. Ventana (<dialog>), fondo y animación
+   3. Botón de cerrar
+   4. Ajustes de las pantallas de cuenta cuando van DENTRO de la ventana
+   5. Movimiento reducido
+
+   IDEA CLAVE
+   Las pantallas de cuenta (crear_cuenta.css, inicio_sesion.css…) se reutilizan
+   tal cual. Aquí solo se corrige lo que cambia al ir en una ventana:
+   - La ventana ya es la superficie (bg-surface + radius-xl + shadow-lg, guía §5),
+     así que la .tarjeta interior se aplana: nunca una tarjeta dentro de otra.
+   - El h1 baja a 32px y el h2 "Tus datos" se oculta visualmente (sigue
+     disponible para lectores de pantalla).
+   - Las filas de dos campos dependen del ANCHO DE LA VENTANA (container query),
+     no del de la pantalla.
+   Los selectores llevan el prefijo `.cuenta-modal .cuenta` para ganar en
+   especificidad a las hojas de cada pantalla, sin usar !important.
+   ========================================================================== */
+
+
+/* ---------------------------------------------------------------------------
+   1. TOKENS DE LA VENTANA
+   (las pantallas definen los suyos bajo .cuenta; la ventana y su botón están
+   fuera de .cuenta, por eso se repiten los que usan)
+   --------------------------------------------------------------------------- */
+.cuenta-modal {
+    --space-2: 8px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --radius-xl: 24px;                      /* modales y hero (guía §5) */
+    --shadow-lg: 0 20px 40px rgba(10, 9, 24, 0.28), 0 4px 12px rgba(10, 9, 24, 0.16);
+    --duracion: 180ms;
+}
+
+
+/* ---------------------------------------------------------------------------
+   2. VENTANA, FONDO Y ANIMACIÓN
+   <dialog> con showModal() ya se centra, atrapa el foco y deja inerte el
+   resto. El <dialog> es transparente; la superficie visible es la .ventana.
+   --------------------------------------------------------------------------- */
+.cuenta-modal {
+    width: min(600px, calc(100% - 2 * var(--space-4)));
+    max-width: none;
+    max-height: calc(100dvh - 2 * var(--space-4));
+    margin: auto;                           /* centrado vertical y horizontal */
+    padding: 0;
+    background: transparent;
+    color: var(--text-primary);
+    border: 0;
+    overflow: visible;
+    font-family: 'Inter', sans-serif;       /* el body usa Sora; el texto va en Inter */
+    opacity: 0;
+    transition: opacity var(--duracion);
+}
+
+/* Pantalla de inicio de sesión: ventana más angosta (solo dos campos) */
+.cuenta-modal:has(.cuenta--angosta) {
+    width: min(480px, calc(100% - 2 * var(--space-4)));
+}
+
+.cuenta-modal.is-abierto {
+    opacity: 1;
+}
+
+.cuenta-modal__ventana {
+    position: relative;
+    max-height: calc(100dvh - 2 * var(--space-4));
+    overflow-y: auto;                       /* si el formulario es alto, scroll dentro */
+    overscroll-behavior: contain;
+    padding: var(--space-5);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);           /* shadow-lg: solo para lo que flota */
+    transform: translateY(var(--space-4)) scale(0.98);
+    transition: transform var(--duracion);
+}
+
+.cuenta-modal.is-abierto .cuenta-modal__ventana {
+    transform: none;
+}
+
+/* Fondo oscuro detrás de la ventana */
+.cuenta-modal::backdrop {
+    background: rgba(10, 9, 24, 0.6);       /* bg-inverse del tema oscuro, translúcido */
+    opacity: 0;
+    transition: opacity var(--duracion);
+}
+
+.cuenta-modal.is-abierto::backdrop {
+    opacity: 1;
+}
+
+/* Mientras la ventana está abierta, la página de atrás no se desplaza */
+html.cuenta-modal-abierto {
+    overflow: hidden;
+}
+
+/* Texto de carga */
+.cuenta-modal__cargando {
+    margin: 0;
+    padding: var(--space-6) 0;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+@media (min-width: 640px) {
+    .cuenta-modal__ventana {
+        padding: var(--space-6);
+    }
+}
+
+
+/* ---------------------------------------------------------------------------
+   3. BOTÓN DE CERRAR
+   Círculo de 44px (objetivo táctil mínimo), arriba a la derecha.
+   Fantasma: acción discreta. Con el aro de foco de la guía.
+   --------------------------------------------------------------------------- */
+.cuenta-modal__cerrar {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 0;
+    border-radius: 999px;                   /* radius-full */
+    cursor: pointer;
+    transition: background-color var(--duracion), color var(--duracion),
+                box-shadow var(--duracion);
+}
+
+.cuenta-modal__cerrar:hover {
+    background-color: var(--color-primary-soft);
+    color: var(--color-primary);
+}
+
+.cuenta-modal__cerrar:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--color-primary);
+}
+
+
+/* ---------------------------------------------------------------------------
+   4. PANTALLAS DE CUENTA DENTRO DE LA VENTANA
+   --------------------------------------------------------------------------- */
+
+/* La ventana ya tiene su padding y su ancho: la pantalla no agrega los suyos */
+.cuenta-modal .cuenta {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Deja libre la esquina del botón de cerrar */
+.cuenta-modal .cuenta > .cuenta__eyebrow {
+    padding-right: 44px;
+}
+
+/* Sin tarjeta dentro de la ventana */
+.cuenta-modal .cuenta .tarjeta {
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* h1 de 32px (guía §3: títulos grandes se encogen) */
+.cuenta-modal .cuenta .cuenta__titulo {
+    font-size: 32px;
+}
+
+.cuenta-modal .cuenta .cuenta__intro {
+    margin-bottom: var(--space-5);
+}
+
+/* El h2 "Tus datos" repite el título: se oculta a la vista, no al lector */
+.cuenta-modal .cuenta .cuenta__subtitulo {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Botón principal a todo el ancho de la ventana */
+.cuenta-modal .cuenta .formulario__enviar {
+    width: 100%;
+    min-width: 0;
+}
+
+/* Filas de dos campos: según el ancho de la ventana, no de la pantalla */
+.cuenta-modal__contenido {
+    container-type: inline-size;
+}
+
+.cuenta-modal .cuenta .formulario__fila {
+    grid-template-columns: 1fr;
+}
+
+@container (min-width: 500px) {
+    .cuenta-modal .cuenta .formulario__fila {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Las alertas van arriba del contenido, debajo del título de la ventana */
+.cuenta-modal .cuenta .cuenta__alertas {
+    margin-top: 36px;                       /* deja libre la X de cerrar (44px - relleno) */
+    margin-bottom: var(--space-5);
+}
+
+
+/* ---------------------------------------------------------------------------
+   5. MOVIMIENTO REDUCIDO  (guía §1: todo cambia al instante)
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .cuenta-modal,
+    .cuenta-modal::backdrop,
+    .cuenta-modal__ventana,
+    .cuenta-modal__cerrar {
+        transition: none;
+    }
+}

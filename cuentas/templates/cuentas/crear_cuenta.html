@@ -42,12 +42,13 @@
     Guía §6 Tarjeta + Formularios: bg-surface, borde, radius-lg, space-5.
     Una sola tarjeta (nunca una tarjeta dentro de otra).
     Sin JS el navegador valida con los atributos required/type/minlength;
-    con JS se activan los mensajes propios (crear_cuenta.js).
+    con JS se activan los mensajes propios (cuentas_formularios.js).
     {% endcomment %}
     <section class="tarjeta" aria-labelledby="titulo-formulario">
         <h2 id="titulo-formulario" class="cuenta__subtitulo">Tus datos</h2>
 
-        <form class="formulario" id="form-crear-cuenta" method="post" action="" data-crear-cuenta>
+        <form class="formulario" id="form-crear-cuenta" method="post"
+              action="{% url 'cuentas:registro' %}" data-cuenta-form>
             {% csrf_token %}
 
             {#  Nombre y apellidos: dos columnas desde tableta  #}
@@ -160,7 +161,11 @@
     {% endcomment %}
     <p class="text-base cuenta__pie">
         ¿Ya tienes cuenta?
-        <a class="enlace" href="{% url 'cuentas:login' %}">Inicia sesión</a>
+        <a class="enlace" href="{% url 'cuentas:login' %}" data-cuenta-modal>Inicia sesión</a>
+    </p>
+    <p class="text-base cuenta__pie">
+        ¿Organizas eventos?
+        <a class="enlace" href="{% url 'cuentas:registro_promotor' %}" data-cuenta-modal>Crea una cuenta de promotor</a>
     </p>
 
 </div>
@@ -168,5 +173,5 @@
 
 {% comment %} Script propio de esta pantalla (mejora; el formulario funciona sin él). {% endcomment %}
 {% block extra_js %}
-    <script src="{% static 'cuentas/js/crear_cuenta.js' %}" defer></script>
-{% endblock %}
+    <script src="{% static 'cuentas/js/cuentas_formularios.js' %}" defer></script>
+{% endblock %}

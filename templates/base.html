@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     {% block extra_css %}{% endblock %}
 </head>
+<script src="{% static 'cuentas/js/cuentas_modal.js' %}"
+        data-css="{% static 'cuentas/css/cuentas_modal.css' %}" defer></script>
+        
 <body>
     <header>
         {% include 'navbar.html' %}
