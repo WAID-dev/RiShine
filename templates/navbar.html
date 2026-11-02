@@ -11,6 +11,7 @@
             </form>
         </li>
         <li><a class="crear-evento ui-button" href="{% url 'crear_evento:crear_evento' %}">Crear evento</a></li>
+        {% if request.user.is_authenticated %}
         <li>
             <a href="{% url 'usuarios:perfil' %}" aria-label="Ir a perfil" class="nav-perfil">
                 <!-- Imagen SVG de Icono perfil -->
@@ -20,5 +21,23 @@
                 </svg>
             </a>
         </li>
+        <li>
+            <form method="post" action="{% url 'cuentas:logout' %}" class="form-salir">
+                {% csrf_token %}
+                <button type="submit" class="boton-salir text-sm">Cerrar sesión</button>
+            </form>
+        </li>
+        {% else %}
+        <li>
+            <a href="{% url 'cuentas:login' %}" aria-label="Iniciar sesión" class="nav-perfil">
+                <!-- Imagen SVG de Icono perfil -->
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+            </a>
+        </li>
+        {% endif %}
     </ul>
 </nav>
+ 

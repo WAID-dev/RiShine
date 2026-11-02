@@ -144,3 +144,19 @@ nav.navbar a.crear-evento.activo {
     stroke: var(--color-primary);
     transition: stroke 0.2s;
 }
+
+/* Cerrar sesión */
+.form-salir { margin: 0; }
+
+.boton-salir {
+    min-height: 44px;
+    padding: 0 12px;
+    background: transparent;
+    border: 0;
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.boton-salir:hover { color: var(--color-primary-hover); }
