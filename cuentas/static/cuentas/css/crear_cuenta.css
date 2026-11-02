@@ -72,7 +72,7 @@
 
 /* Párrafo destacado bajo el título, máx. 68 caracteres por línea */
 .cuenta__intro {
-    margin: 0;
+    margin: 0 0 var(--space-6);             /* aire entre el párrafo y la tarjeta */
     max-width: 68ch;
     color: var(--text-secondary);
     line-height: 1.5;

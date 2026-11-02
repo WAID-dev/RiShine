@@ -52,12 +52,13 @@
     <section class="tarjeta" aria-labelledby="titulo-formulario">
         <h2 id="titulo-formulario" class="cuenta__subtitulo">Tus datos</h2>
 
-        {# multipart/form-data permite enviar archivos al servidor #}
+        {# multipart/form-data permite enviar archivos al servidor; data-cuenta-form activa la validación de cuentas_formularios.js #}
         <form class="formulario"
               id="form-crear-cuenta-promotor"
               method="post"
-              action=""
-              enctype="multipart/form-data">
+              action="{% url 'cuentas:registro_promotor' %}"
+              enctype="multipart/form-data"
+              data-cuenta-form>
 
             {# Protege el formulario contra solicitudes CSRF #}
             {% csrf_token %}
@@ -155,7 +156,7 @@
                 <input class="campo__control{% if errores.organizacion %} is-invalid{% endif %}"
                        type="text" id="organizacion" name="organizacion" maxlength="50"
                        value="{{ valores.organizacion|default:'' }}"
-                       placeholder="Ej. Club de robótica CUCEI"
+                       placeholder="Ej. Club de Robótica"
                        autocomplete="organization" required
                        {% if errores.organizacion %}aria-invalid="true"{% endif %}
                        aria-describedby="ayuda-organizacion error-organizacion">
@@ -219,7 +220,11 @@
     {# Ofrece un enlace a quienes ya tienen una cuenta #}
     <p class="text-base cuenta__pie">
         ¿Ya tienes cuenta?
-        <a class="enlace" href="{% url 'cuentas:login' %}">Inicia sesión</a>
+        <a class="enlace" href="{% url 'cuentas:login' %}" data-cuenta-modal>Inicia sesión</a>
+    </p>
+    <p class="text-base cuenta__pie">
+        ¿Solo quieres asistir a eventos?
+        <a class="enlace" href="{% url 'cuentas:registro' %}" data-cuenta-modal>Crea una cuenta de usuario</a>
     </p>
     <p class="text-base cuenta__pie">
         ¿Solo quieres asistir a eventos?
@@ -227,4 +232,9 @@
     </p>
 
 </div>
+{% endblock %}
+
+{# Validación y botón Mostrar (mejora; el formulario funciona sin ella) #}
+{% block extra_js %}
+    <script src="{% static 'cuentas/js/cuentas_formularios.js' %}" defer></script>
 {% endblock %}

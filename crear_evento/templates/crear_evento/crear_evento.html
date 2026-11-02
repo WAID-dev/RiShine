@@ -16,9 +16,9 @@
 
 
     <h1>Crear evento</h1>
-    <main>
+    <div class="pagina-crear-evento">
 
-        <form method="post" enctype="multipart/form-data">
+        <form id="formCrearEvento" method="post" enctype="multipart/form-data">
         {% csrf_token %}
     
         <section id="panelInformacionBasica">
@@ -105,7 +105,7 @@
         <button id="boton-borrador" class="ui-button" type="submit" name="accion" value="borrador">Guarde su borrador</button>
         <button id="boton-cancelar" class="ui-button"><a id="link-cancelar">Cancelar</a></button>
         </form>
-    </main>
+    </div>
     <footer>
         <p><small>* Información obligatoria *</small></p>
     </footer>

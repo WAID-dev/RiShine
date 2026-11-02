@@ -1,0 +1,24 @@
+/* ============================================================================
+   RISHINE · CUENTAS · Iniciar sesión
+   ============================================================================
+   Archivo : cuentas/static/cuentas/css/inicio_sesion.css
+   Se carga DESPUÉS de crear_cuenta.css, que aporta .cuenta, .tarjeta,
+   .formulario, .campo, .btn y .alerta. Aquí solo va lo exclusivo del login.
+
+   POR QUÉ EXISTE (corrige el desfase)
+   Antes esta pantalla usaba static/css/login.css con sus propias reglas de
+   ancho y márgenes, distintas a las del resto de pantallas de cuenta, y por
+   eso quedaba descentrada. Ahora comparte el mismo contenedor `.cuenta`
+   (centrado con margin: 0 auto) y solo se angosta con un modificador.
+   ========================================================================== */
+
+/* Formulario de solo dos campos: contenedor más angosto que el de registro.
+   Sigue centrado porque .cuenta ya trae margin: 0 auto. */
+.cuenta.cuenta--angosta {
+    max-width: 480px;
+}
+
+/* Enlaces de respaldo debajo del botón (crear cuenta / promotor) */
+.cuenta__pie + .cuenta__pie {
+    margin-top: var(--space-2);
+}
