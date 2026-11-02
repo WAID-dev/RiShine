@@ -36,31 +36,31 @@
         </select>
 
         <p>Descripción*:</p>
-        <textarea name="descripcion" class="input-campo text-base" placeholder="Ingrese una breve descripción" required></textarea>
+        <textarea name="descripcion" class="input-campo text-base" placeholder="Ingrese una breve descripción" ></textarea> <!-- required -->
 
         <p>Cupo*:</p>
-        <input class="input-campo text-base" type="number" name="cupo" min="0" required>
+        <input class="input-campo text-base" type="number" name="cupo" min="0"> <!-- required -->
 
         <p>Costo*:</p>
-        <input class="input-campo text-base" type="number" name="costo" min="0" required>
+        <input class="input-campo text-base" type="number" name="costo" min="0" > <!-- required -->
 
         <h2>Información de la dirección</h2>
         
 
         <p>Modo*:</p>
-        <select name="modo" class="input-campo text-base" required>
+        <select name="modo" class="input-campo text-base" > <!-- required -->
             <option value="Presencial">Presencial</option>
             <option value="Virtual">Virtual</option>
         </select>
 
         <p>Dirección*:</p>
-        <input type="text" name="direccion" class="input-campo text-base" placeholder="Ej: Av. Vallarta 1234, Col. Americana, Guadalajara" required>
+        <input type="text" name="direccion" class="input-campo text-base" placeholder="Ej: Av. Vallarta 1234, Col. Americana, Guadalajara"> <!-- required -->
 
         <p>Referencias:</p>
         <textarea name="referencias" class="input-campo text-base" placeholder="Ej: Frente al parque, edificio azul"></textarea>
 
         <p>URL del evento*:</p>
-        <input type="url" name="url_evento" class="input-campo text-base" placeholder="Ej: https://www.ejemplo.com/evento" required>
+        <input type="url" name="url_evento" class="input-campo text-base" placeholder="Ej: https://www.ejemplo.com/evento" > <!-- required -->
 
         <h2>Información de fechas</h2>
         
@@ -71,10 +71,10 @@
         <label for="varios_dias">Varios días</label>
 
         <p>Fecha de inicio*:</p>
-        <input class="input-campo text-base" type="date" name="fecha_inicio" required>
+        <input class="input-campo text-base" type="date" name="fecha_inicio" > <!-- required -->
 
         <p>Fecha de fin*:</p>
-        <input class="input-campo text-base" type="date" name="fecha_fin" required>
+        <input class="input-campo text-base" type="date" name="fecha_fin" > <!-- required -->
 
             {% for horario in horarios %}
             <div>
