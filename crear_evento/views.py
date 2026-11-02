@@ -1,6 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Evento, Categoria
 
+@login_required
 def crear_evento(request):
 
     if request.method == 'POST':

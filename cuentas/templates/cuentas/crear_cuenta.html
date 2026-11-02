@@ -76,6 +76,18 @@
                 </div>
             </div>
 
+                        <div class="campo">
+                <label class="ui-label campo__etiqueta" for="username">Nombre de usuario</label>
+                <input class="campo__control{% if errores.username %} is-invalid{% endif %}"
+                       type="text" id="username" name="username" maxlength="30"
+                       value="{{ valores.username|default:'' }}"
+                       placeholder="Ej. mariana.lopez" autocomplete="username" required
+                       {% if errores.username %}aria-invalid="true"{% endif %}
+                       aria-describedby="ayuda-username error-username">
+                <p class="text-sm campo__ayuda" id="ayuda-username">Hasta 30 caracteres: letras, números, puntos y guiones. Con él inicias sesión.</p>
+                <p class="text-sm campo__error" id="error-username" {% if not errores.username %}hidden{% endif %}>{{ errores.username }}</p>
+            </div>
+            
             {#  Correo  #}
             <div class="campo">
                 <label class="ui-label campo__etiqueta" for="correo">Correo electrónico</label>
@@ -85,7 +97,7 @@
                        placeholder="tucorreo@ejemplo.com" autocomplete="email" required
                        {% if errores.correo %}aria-invalid="true"{% endif %}
                        aria-describedby="ayuda-correo error-correo">
-                <p class="text-sm campo__ayuda" id="ayuda-correo">Lo usarás para iniciar sesión y recibir avisos de tus eventos.</p>
+                <p class="text-sm campo__ayuda" id="ayuda-correo">Lo usaremos para avisarte de tus eventos.</p>
                 <p class="text-sm campo__error" id="error-correo" {% if not errores.correo %}hidden{% endif %}>{{ errores.correo }}</p>
             </div>
 
@@ -167,7 +179,10 @@
         ¿Organizas eventos?
         <a class="enlace" href="{% url 'cuentas:registro_promotor' %}" data-cuenta-modal>Crea una cuenta de promotor</a>
     </p>
-
+        <p class="text-base cuenta__pie">
+        ¿Quieres publicar eventos?
+        <a class="enlace" href="{% url 'cuentas:registro_promotor' %}">Crea una cuenta de promotor</a>
+    </p>
 </div>
 {% endblock %}
 

@@ -94,6 +94,18 @@
                 </div>
             </div>
 
+                        <div class="campo">
+                <label class="ui-label campo__etiqueta" for="username">Nombre de usuario</label>
+                <input class="campo__control{% if errores.username %} is-invalid{% endif %}"
+                       type="text" id="username" name="username" maxlength="30"
+                       value="{{ valores.username|default:'' }}"
+                       placeholder="Ej. mariana.lopez" autocomplete="username" required
+                       {% if errores.username %}aria-invalid="true"{% endif %}
+                       aria-describedby="ayuda-username error-username">
+                <p class="text-sm campo__ayuda" id="ayuda-username">Hasta 30 caracteres: letras, números, puntos y guiones. Con él inicias sesión.</p>
+                <p class="text-sm campo__error" id="error-username" {% if not errores.username %}hidden{% endif %}>{{ errores.username }}</p>
+            </div>
+            
             {# Campo para registrar el correo electrónico #}
             <div class="campo">
                 <label class="ui-label campo__etiqueta" for="correo">Correo electrónico</label>
@@ -106,7 +118,7 @@
 
                 {# Explica para qué se utilizará el correo #}
                 <p class="text-sm campo__ayuda" id="ayuda-correo">
-                    Lo usarás para iniciar sesión y recibir avisos de tus eventos.
+                    Lo usaremos para avisarte de tus eventos.
                 </p>
 
                 {# Muestra el error del correo cuando existe #}
@@ -225,6 +237,10 @@
     <p class="text-base cuenta__pie">
         ¿Solo quieres asistir a eventos?
         <a class="enlace" href="{% url 'cuentas:registro' %}" data-cuenta-modal>Crea una cuenta de usuario</a>
+    </p>
+    <p class="text-base cuenta__pie">
+        ¿Solo quieres asistir a eventos?
+        <a class="enlace" href="{% url 'cuentas:registro' %}">Crea una cuenta de usuario</a>
     </p>
     <p class="text-base cuenta__pie">
         ¿Solo quieres asistir a eventos?
