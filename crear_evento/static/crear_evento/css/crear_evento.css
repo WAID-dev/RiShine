@@ -1,3 +1,10 @@
+.contenedor-formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+}
+
 .fomulario-crear-evento {
     width: 720px;
 }
@@ -6,11 +13,48 @@
     display: none;
 }
 
+#panelInformacionBasica{
+    background-color: var(--color-primary);
+    margin: 15px;
+    padding: 25px;
+    border-radius: 15px;
+    color: aliceblue;
+}
+
+#panelInformacionDireccion{
+    background-color: var(--color-mint-strong);
+    margin: 15px;
+    padding: 25px;
+    border-radius: 15px;
+    color: aliceblue;
+}
+
+#panelInformacionFechas{
+    background-color: var(--color-amber);
+    margin: 15px;
+    padding: 25px;
+    border-radius: 15px;
+    color: aliceblue;
+}
+
+#panelInformacionContacto{
+    background-color: var(--color-primary);
+    margin: 15px;
+    padding: 25px;
+    border-radius: 15px;
+    color: aliceblue;
+}
+
+#agregarImagen{
+    color: aliceblue;
+}
+
 #boton-imagen {
     display: inline-block;
     margin-bottom: 24px;
     padding: 12px 24px;
-    color: var(--text-secondary);
+    color: var(--color-primary-deep);
+    background-color: var(--text-on-inverse);
     border-radius: 10px;
     cursor: pointer;
     text-decoration: none;
@@ -18,7 +62,7 @@
 }
 
 #boton-imagen:hover {
-    background-color: var(--color-primary-hover);
+    background-color: var(--color-amber);
     color: var(--bg-page);
 }
 
@@ -82,4 +126,11 @@
 #link-cancelar {
     color: var(--bg-page);
     text-decoration: none;
+}
+
+footer {
+    display: block;
+    width: 65%;
+    text-align: left;
+    padding-left: 20px;
 }
