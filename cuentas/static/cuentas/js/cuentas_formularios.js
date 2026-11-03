@@ -115,17 +115,6 @@
         /* Solo promotor */
         organizacion: function (v) {
             return v.trim() ? '' : 'Escribe el nombre de tu organización.';
-        },
-        ine: function (_v, campo) {
-            var archivo = campo.files && campo.files[0];
-            if (!archivo) { return 'Sube una foto o un PDF de tu INE.'; }
-            if (!TIPOS_ARCHIVO.test(archivo.type)) {
-                return 'Sube tu INE como imagen (JPG o PNG) o como PDF.';
-            }
-            if (archivo.size > MAX_MB_ARCHIVO * 1024 * 1024) {
-                return 'El archivo pesa más de ' + MAX_MB_ARCHIVO + ' MB. Sube una versión más ligera.';
-            }
-            return '';
         }
     };
 

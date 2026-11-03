@@ -33,7 +33,7 @@ class Promotor(models.Model):
     Permite almacenar información adicional necesaria para la gestión
     y publicación de eventos dentro de la plataforma
     """
-    id_promotor = models.AutoField(primary_key=True)
+    id_promotor = models.BigAutoField(primary_key=True)
     usuario = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

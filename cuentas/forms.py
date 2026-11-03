@@ -1,4 +1,3 @@
-import os
 from datetime import date
 
 from django import forms
@@ -12,8 +11,6 @@ User = get_user_model()
 # Reglas que se cambian en un solo lugar
 EDAD_MIN = 15
 EDAD_MAX = 29
-INE_MAX_MB = 5
-INE_EXTENSIONES = ('.jpg', '.jpeg', '.png', '.pdf')
 
 
 def errores_a_dict(form):
@@ -116,7 +113,7 @@ class RegistroUsuarioForm(RegistroBaseForm):
         return nacimiento
 
 
-class RegistroPromotorForm(RegistroBaseForm):
+class RegistroPromotorForm(forms.Form):
     organizacion = forms.CharField(
         max_length=50,
         error_messages={
@@ -124,20 +121,14 @@ class RegistroPromotorForm(RegistroBaseForm):
             'max_length': 'Usa hasta 50 caracteres.',
         },
     )
-    ine = forms.FileField(
+    telefono = forms.CharField(
+        max_length=15,
+        validators=[RegexValidator(
+            r'^\+?[\d\s-]{8,15}$',
+            'Escribe un teléfono válido, por ejemplo 3312345678.',
+        )],
         error_messages={
-            'required': 'Sube una foto o un PDF de tu INE.',
-            'invalid': 'No pudimos leer el archivo. Sube otro.',
-            'empty': 'El archivo está vacío. Sube otro.',
-            'missing': 'No pudimos leer el archivo. Sube otro.',
+            'required': 'Escribe tu número de teléfono.',
+            'max_length': 'Usa hasta 15 caracteres.',
         },
     )
-
-    def clean_ine(self):
-        archivo = self.cleaned_data['ine']
-        extension = os.path.splitext(archivo.name)[1].lower()
-        if extension not in INE_EXTENSIONES:
-            raise ValidationError('Sube una imagen JPG o PNG, o un PDF.')
-        if archivo.size > INE_MAX_MB * 1024 * 1024:
-            raise ValidationError(f'El archivo pesa más de {INE_MAX_MB} MB. Sube uno más ligero.')
-        return archivo

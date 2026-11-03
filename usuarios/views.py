@@ -10,7 +10,7 @@ from .models import Usuario
 
 
 # Create your views here.
-@login_required(login_url='/?show_login=1&next=/usuarios/perfil/')
+@login_required
 def perfil(request):
     """
         Permite al usuario autenticado visualizar y actualizar
@@ -61,7 +61,7 @@ def perfil(request):
         'usuario': request.user
     })
 
-@login_required(login_url='/?show_login=1')
+@login_required
 def eliminar_cuenta(request):
     """
         Permite eliminar la cuenta del usuario autenticado

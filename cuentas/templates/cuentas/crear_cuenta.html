@@ -175,14 +175,6 @@
         ¿Ya tienes cuenta?
         <a class="enlace" href="{% url 'cuentas:login' %}" data-cuenta-modal>Inicia sesión</a>
     </p>
-    <p class="text-base cuenta__pie">
-        ¿Organizas eventos?
-        <a class="enlace" href="{% url 'cuentas:registro_promotor' %}" data-cuenta-modal>Crea una cuenta de promotor</a>
-    </p>
-        <p class="text-base cuenta__pie">
-        ¿Quieres publicar eventos?
-        <a class="enlace" href="{% url 'cuentas:registro_promotor' %}">Crea una cuenta de promotor</a>
-    </p>
 </div>
 {% endblock %}
 
@@ -190,3 +182,4 @@
 {% block extra_js %}
     <script src="{% static 'cuentas/js/cuentas_formularios.js' %}" defer></script>
 {% endblock %}
+

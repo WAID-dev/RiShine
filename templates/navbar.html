@@ -10,15 +10,27 @@
                 <input type="search" name="busqueda" placeholder="Buscar eventos..." class="text-sm">
             </form>
         </li>
-        <li><a class="crear-evento ui-button" href="/">Crear Evento</a></li>
         <li>
-            <a href="{% url 'cuentas:login' %}" data-cuenta-modal aria-label="Ir a perfil" class="nav-perfil">
-                <!-- Imagen SVG de Icono perfil -->
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                    <circle cx="12" cy="7" r="4"/>
-                </svg>
-            </a>
+            {% if user.is_authenticated %}
+                {% if user.promotor %}
+                    <a class="crear-evento ui-button" href="{% url 'crear_evento:crear_evento' %}">Crear Evento</a>
+                {% else %}
+                    <a class="crear-evento ui-button" href="{% url 'cuentas:registro_promotor' %}" data-cuenta-modal>Crear Evento</a>
+                {% endif %}
+            {% else %}
+                <a class="crear-evento ui-button" href="{% url 'cuentas:login' %}" data-cuenta-modal>Crear Evento</a>
+            {% endif %}
+        </li>
+        <li>
+            {% if user.is_authenticated %}
+                <a href="{% url 'usuarios:perfil' %}" aria-label="Ir a perfil" class="nav-perfil">
+                    {% include 'icono_perfil.html' %}
+                </a>
+            {% else %}
+                <a href="{% url 'cuentas:login' %}" data-cuenta-modal aria-label="Ir a perfil" class="nav-perfil">
+                    {% include 'icono_perfil.html' %}
+                </a>
+            {% endif %}
         </li>
     </ul>
 

@@ -1,9 +1,13 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Evento, Categoria
+from django.contrib import messages
 
 @login_required
 def crear_evento(request):
+    if not hasattr(request.user, 'promotor'):
+        messages.error(request, 'Necesitas una cuenta de promotor para crear eventos.')
+        return redirect('cuentas:registro_promotor')
 
     if request.method == 'POST':
         # accion = request.POST.get('accion')
