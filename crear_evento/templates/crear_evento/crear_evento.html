@@ -54,43 +54,36 @@
 
 
         <p>Modo*:</p>
-        <select name="modo" class="input-campo text-base" required>
+        <select id="modo" name="modo" class="input-campo text-base" required>
+            <option value="Híbrido">Híbrido</option>
             <option value="Presencial">Presencial</option>
             <option value="Virtual">Virtual</option>
         </select>
 
-        <p>Dirección*:</p>
-        <input type="text" name="direccion" class="input-campo text-base" placeholder="Ej: Av. Vallarta 1234, Col. Americana, Guadalajara" required>
+        <p class="direccion">Dirección*:</p>
+        <input type="text" name="direccion" class="input-campo text-base direccion" placeholder="Ej: Av. Vallarta 1234, Col. Americana, Guadalajara" required>
 
-        <p>Referencias:</p>
-        <textarea name="referencias" class="input-campo text-base" placeholder="Ej: Frente al parque, edificio azul"></textarea>
+        <p class="referencias">Referencias:</p>
+        <textarea name="referencias" class="input-campo text-base referencias" placeholder="Ej: Frente al parque, edificio azul"></textarea>
 
-        <p>URL del evento*:</p>
-        <input type="url" name="url_evento" class="input-campo text-base" placeholder="Ej: https://www.ejemplo.com/evento" required>
+        <p class="url_evento">URL del evento*:</p>
+        <input type="url" name="url_evento" class="input-campo text-base url_evento" placeholder="Ej: https://www.ejemplo.com/evento" required>
         </section>
 
         <section id="panelInformacionFechas">
             <h2>Información de fechas</h2>
 
             <p>¿Es un evento de un solo día o de varios?</p>
-            <input type="radio" id="un_dia" name="tipo_evento" value="un_dia" checked>
+            <input type="radio" id="un_dia" name="tipo_evento" value="un_dia" onclick="eventoDias(this)" checked>
             <label for="un_dia">Un solo día</label>
-            <input type="radio" id="varios_dias" name="tipo_evento" value="varios_dias">
+            <input type="radio" id="varios_dias" name="tipo_evento" value="varios_dias" onclick="eventoDias(this)">
             <label for="varios_dias">Varios días</label>
 
-            <p>Fecha de inicio*:</p>
-            <input class="input-campo text-base" type="date" name="fecha_inicio" required>
+            <p class="fecha_inicio">Fecha de inicio*:</p>
+            <input class="input-campo text-base fecha_inicio" type="date" name="fecha_inicio" required>
 
-            <p>Fecha de fin*:</p>
-            <input class="input-campo text-base" type="date" name="fecha_fin" required>
-
-            <h2>Dias del evento</h2>
-            {% for horario in horarios %}
-            <div>
-                <input type="checkbox" id="horario_{{ horario.id_horario }}"
-                name="horarios" value="{{ horario.id_horario }}">                    <label for="horario_{{ horario.id_horario }}">{{ horario.dia }}</label>
-            </div>
-            {% endfor %}
+            <p class="fecha_fin" style="display: none;">Fecha de fin*:</p>
+            <input style="display: none;" class="input-campo text-base fecha_fin" type="date" name="fecha_fin" required>
         </section>
 
         <section id="panelInformacionContacto">
@@ -102,10 +95,14 @@
         <br><br>
         <button id="boton-publicar" class="ui-button" type="submit" name="accion" value="publicado">Publique su evento</button>
         <button id="boton-borrador" class="ui-button" type="submit" name="accion" value="borrador">Guarde su borrador</button>
-        <button id="boton-cancelar" class="ui-button"><a id="link-cancelar">Cancelar</a></button>
+        <button id="boton-cancelar" class="ui-button"><a id="link-cancelar" href="/inicio/templates/inicio/inicio.html">Cancelar</a></button>
         </form>
     </div>
     <footer>
         <p><small>* Información obligatoria *</small></p>
     </footer>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'crear_evento/js/crear_evento.js' %}"></script>
 {% endblock %}

@@ -10,7 +10,7 @@ def crear_evento(request):
         return redirect('cuentas:registro_promotor')
 
     if request.method == 'POST':
-        # accion = request.POST.get('accion')
+        accion = request.POST.get('accion')
         imagen_evento = request.FILES.get('imagen', None)
         nombre_evento = request.POST.get('titulo')
         categoria = request.POST.get('categoria')
@@ -26,6 +26,7 @@ def crear_evento(request):
         contacto = request.POST.get('contacto')
 
         evento = Evento.objects.create(
+            estatus=accion,
             imagen=imagen_evento,
             nombre_evento=nombre_evento,
             categoria_id=categoria,
