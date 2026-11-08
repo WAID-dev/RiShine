@@ -55,9 +55,9 @@
 
         <p>Modo*:</p>
         <select id="modo" name="modo" class="input-campo text-base" required>
-            <option value="Híbrido">Híbrido</option>
-            <option value="Presencial">Presencial</option>
-            <option value="Virtual">Virtual</option>
+            <option value="presencial">Presencial</option>
+            <option value="virtual">Virtual</option>
+            <option value="hibrido">Híbrido</option>
         </select>
 
         <p class="direccion">Dirección*:</p>
@@ -67,7 +67,7 @@
         <textarea name="referencias" class="input-campo text-base referencias" placeholder="Ej: Frente al parque, edificio azul"></textarea>
 
         <p class="url_evento">URL del evento*:</p>
-        <input type="url" name="url_evento" class="input-campo text-base url_evento" placeholder="Ej: https://www.ejemplo.com/evento" required>
+        <input type="url" name="url_evento" class="input-campo text-base url_evento" placeholder="Ej: https://www.ejemplo.com/evento">
         </section>
 
         <section id="panelInformacionFechas">
@@ -83,7 +83,7 @@
             <input class="input-campo text-base fecha_inicio" type="date" name="fecha_inicio" required>
 
             <p class="fecha_fin" style="display: none;">Fecha de fin*:</p>
-            <input style="display: none;" class="input-campo text-base fecha_fin" type="date" name="fecha_fin" required>
+            <input style="display: none;" class="input-campo text-base fecha_fin" type="date" name="fecha_fin">
         </section>
 
         <section id="panelInformacionContacto">

@@ -1,31 +1,22 @@
 const modo = document.getElementById('modo');
 
+function mostrar(selector, visible) {
+    document.querySelectorAll(selector).forEach(function (el) {
+        el.style.display = visible ? 'block' : 'none';
+    });
+}
 
-modo.addEventListener('change', function() {
-    const direccion = document.querySelectorAll('.direccion');
-    const referencias = document.querySelectorAll('.referencias');
-    const url_evento = document.querySelectorAll('.url_evento');
-    if (this.value === 'Virtual') {
-        direccion.forEach(el => el.style.display = 'none');
-        referencias.forEach(el => el.style.display = 'none');
-        url_evento.forEach(el => el.style.display = 'block');
-    } else if (this.value === 'Presencial') {
-        direccion.forEach(el => el.style.display = 'block');
-        referencias.forEach(el => el.style.display = 'block');
-        url_evento.forEach(el => el.style.display = 'none');
-    } else {
-        direccion.forEach(el => el.style.display = 'block');
-        referencias.forEach(el => el.style.display = 'block');
-        url_evento.forEach(el => el.style.display = 'block');
-    }
-});
+function actualizarModo() {
+    const m = modo.value;
+    mostrar('.direccion', m !== 'virtual');
+    mostrar('.referencias', m !== 'virtual');
+    mostrar('.url_evento', m !== 'presencial');
+}
 
 function eventoDias(radio) {
-    if (radio.value === 'un_dia') {
-        document.querySelectorAll('.fecha_inicio').forEach(el => el.style.display = 'block');
-        document.querySelectorAll('.fecha_fin').forEach(el => el.style.display = 'none');
-    } else if (radio.value === 'varios_dias') {
-        document.querySelectorAll('.fecha_inicio').forEach(el => el.style.display = 'block');
-        document.querySelectorAll('.fecha_fin').forEach(el => el.style.display = 'block');
-    }
+    mostrar('.fecha_inicio', true);
+    mostrar('.fecha_fin', radio.value === 'varios_dias');
 }
+
+modo.addEventListener('change', actualizarModo);
+actualizarModo();

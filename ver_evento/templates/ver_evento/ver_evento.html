@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}{% if evento %}{{ evento.nombre_evento }}{% else %}Ver evento{% endif %}{% endblock %}
+{% block title %}{{ evento.nombre_evento }} | Rishine{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'ver_evento/css/ver_evento.css' %}">
@@ -10,117 +10,108 @@
 {% block contenido %}
 <div>
     {% if messages %}
-    {% for message in messages %}
-        <p>{{ message }}</p>
-    {% endfor %}
-{% endif %}
-
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
 
     <section id="panelGeneralEvento">
 
         <section id="panelTitulo">
             <div id="evento-info">
-                <h1>{% if evento %}{{ evento.nombre_evento }}{% else %}[Titulo evento]{% endif %}</h1>
+                <h1>{{ evento.nombre_evento }}</h1>
             </div>
 
             <div id="panelCategoria">
-                    <h4>Categoría:</h4>
-                    <p class="text-base">{% if evento %}{{ evento.categoria.nombre_categoria }}{% else %}[Nombre categoria]{% endif %}</p>
+                <h4>Categoría:</h4>
+                <p class="text-base">{{ evento.categoria.nombre_categoria }}</p>
             </div>
         </section>
-        
 
         <section id="tituloEimagen">
             <div id="event-img">
-                {% if evento and evento.imagen %}
-                    <img src="{{ evento.imagen.url }}" alt="{{ evento.titulo }}">
+                {% if evento.imagen %}
+                    <img src="{{ evento.imagen.url }}" alt="{{ evento.nombre_evento }}">
                 {% else %}
                     <div class="img-placeholder">Sin imagen</div>
                 {% endif %}
             </div>
-        
+
             <section id="botonesAcciones">
-            <h2>Acciones</h2>
-            <form method="post">
-                {% csrf_token %}
-                <input type="hidden" name="accion" value="guardar">
-                <button type="submit" id="boton-guardar" class="ui-button">Guardar</button>
-            </form>
-            <form method="post">
-                {% csrf_token %}
-                <input type="hidden" name="accion" value="favorito">
-                <button type="submit" id="boton-like" class="ui-button">Me gusta</button>
-            </form>
+                <h2>Acciones</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="accion" value="guardar">
+                    <button type="submit" id="boton-guardar" class="ui-button">Guardar</button>
+                </form>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="accion" value="favorito">
+                    <button type="submit" id="boton-like" class="ui-button">Me gusta</button>
+                </form>
             </section>
         </section>
 
-        <section id="seccionMiniInfo">
-            <div id="fecha">
-                <h4>Fecha:</h4>
-                <p class="text-base">{% if evento %}
-                        {{ evento.fecha_inicio }} - {{ evento.fecha_fin}}
-                    {% else %}
-                        [Fecha evento]
-                    {% endif %}
-                </p>    
+        <section id="seccionMiniInfo" class="rejilla-info">
+            <div class="dato" id="fecha">
+                <h4>Fecha</h4>
+                <p class="text-base">{{ evento.fecha_inicio }}{% if evento.fecha_fin != evento.fecha_inicio %} - {{ evento.fecha_fin }}{% endif %}</p>
             </div>
 
-            <div id="dias">
-                <h4>Dias:</h4>
-                {% if horarios %}
-                    <ul>
-                    {% for horario in horarios %}
-                        <li>{{ horario.dia }}</li>
-                    {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>{% if evento %}Sin horarios registrados{% else %}[Dias]{% endif %}</p>
+            <div class="dato" id="cupo">
+                <h4>Cupo disponible</h4>
+                <p class="text-base">{{ evento.cupo }}</p>
+            </div>
+
+            <div class="dato" id="costo">
+                <h4>Costo</h4>
+                <p class="text-base">{% if evento.costo == 0 %}Gratis{% else %}$ {{ evento.costo }}{% endif %}</p>
+            </div>
+
+            <div class="dato" id="modalidad">
+                <h4>Modalidad</h4>
+                <p class="text-base">{{ evento.get_modo_display }}</p>
+            </div>
+
+            {% if evento.modo == 'presencial' or evento.modo == 'hibrido' %}
+            <div class="dato dato--ancho" id="ubicacion">
+                <h4>Ubicación</h4>
+                <p class="text-base">{{ evento.direccion }}</p>
+                {% if evento.referencias %}
+                    <h4>Referencias</h4>
+                    <p class="text-base">{{ evento.referencias }}</p>
                 {% endif %}
             </div>
+            {% endif %}
 
-            <div id="cupo">
-                <h4>Cupo disponible:</h4>
-                <p class="text-base">{% if evento %}{{ evento.cupo }}{% else %}[Cupo disponible]{% endif %}</p>
-            </div>
-
-            <div id="costo">
-                <h4>Costo:</h4>
-                <p class="text-base">{% if evento %}$ {{ evento.costo }}{% else %}[Costo]{% endif %}</p>
-            </div>
-
-        </section>   
-        
-        <div id="ubicacion">
-            <h4>Ubicacion:</h4>
-            <p class="text-base">{% if evento %}{{ evento.direccion }}{% else %}[Calle][No. ext.][No. int.][Colonia][Municipio][Estado]{% endif %}</p>
-
-            <h4>Referencias de ubicacion:</h4>
-            <p class="text-base">{% if evento %}{{ evento.referencias }}{% else %}[Referencias de ubicacion]{% endif %}</p>
-        </div>
-
-        <section id="seccionDescripcion">
-                <h4>Descripcion:</h4>
+            {% if evento.modo == 'virtual' or evento.modo == 'hibrido' %}
+            <div class="dato dato--ancho" id="enlace">
+                <h4>Enlace del evento</h4>
                 <p class="text-base">
-                {% if evento %}{{ evento.descripcion }}{% else %}
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum nihil
-                corrupti, illum iste nemo nam libero ex accusamus quam est corporis
-                ullam harum illo! Laborum, vero! Omnis accusantium nemo aspernatur!
-                {% endif %}
+                    {% if evento.url_evento %}
+                        <a href="{{ evento.url_evento }}" target="_blank" rel="noopener noreferrer">{{ evento.url_evento }}</a>
+                    {% else %}
+                        Sin enlace registrado
+                    {% endif %}
                 </p>
+            </div>
+            {% endif %}
+
+            <div class="dato" id="contacto">
+                <h4>Contacto</h4>
+                <p class="text-base">{{ evento.contacto|default:"Sin contacto registrado" }}</p>
+            </div>
         </section>
 
-        <!--<h4>Organización:</h4>
-        <ul>
-        <li>{%if evento %}{{ evento.promotor.organizacion }}{% else %}[Organizador]{% endif %}</li>
-        </ul>
-        <hr>
-        <br>-->
+        <section id="seccionDescripcion">
+            <h4>Descripción:</h4>
+            <p class="text-base">{{ evento.descripcion }}</p>
+        </section>
+
     </section>
 </div>
-
 {% endblock %}
 
-<!--Animaciones-->
 {% block extra_js %}
 <script src="{% static 'ver_evento/js/ver_evento.js' %}"></script>
 {% endblock %}

@@ -100,23 +100,37 @@ body{
     background-color: var(--color-primary-soft);
 }
 
-
-#seccionMiniInfo {
+.rejilla-info {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
     margin-bottom: 16px;
 }
 
-#fecha, #dias, #cupo, #costo, #ubicacion {
+.dato {
     background-color: var(--bg-page);
-    padding: 20px;
+    padding: 16px;
     border-radius: 10px;
     min-width: 0;
     overflow-wrap: anywhere;
 }
 
-#ubicacion { margin-bottom: 16px; }
+.dato--ancho {
+    grid-column: span 2;
+}
+
+.dato h4 {
+    margin: 0 0 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+}
+
+.dato h4:not(:first-child) { margin-top: 12px; }
+
+.dato p { margin: 0; }
+
 
 #seccionDescripcion {
     padding: 20px;
@@ -139,7 +153,11 @@ body{
 }
 
 
-
+@media (max-width: 600px) {
+    .dato--ancho {
+        grid-column: auto;
+    }
+}
 
 @media (max-width: 800px) {
     #tituloEimagen { grid-template-columns: 1fr; }
