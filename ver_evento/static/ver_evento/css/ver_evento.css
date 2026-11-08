@@ -2,150 +2,128 @@ body{
     background-color: var(--color-primary-active);
 }
 
-#panelGeneralEvento{
-    margin: -15px;
-    padding: 5px;
+#panelGeneralEvento {
+    margin: 0;
+    padding: clamp(12px, 3vw, 32px);
     border-radius: 15px;
     background-color: var(--color-primary-soft);
 }
 
-#panelTitulo{
-    display: flex;              
-    flex-direction: row;        
-    justify-content: left;   
-    align-items: center;        
-    flex-wrap: wrap;           
-    gap: 400px; 
+#panelTitulo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px 24px;
+    margin-bottom: 24px;
 }
 
-#panelCategoria{
-    display: flex;              
-    flex-direction: row;        
-    justify-content: left;   
-    align-items: center;        
-    flex-wrap: wrap;           
-    gap: 45px; 
+#panelCategoria {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    padding: 4px 16px;
     background-color: var(--color-primary-deep);
     color: aliceblue;
-    padding: 15px;
-    padding-top: 2px;
-    padding-bottom: 2px;
     border-radius: 15px;
 }
 
+#panelCategoria h4,
+#panelCategoria p { margin: 0; }
+
 #tituloEimagen{
-    display: flex;              
-    flex-direction: row;        
-    justify-content: left;   
-    align-items: center;        
-    flex-wrap: wrap;           
-    gap: 10px; 
-    margin-bottom: 40px;  
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
 }
 
+#event-img img,
+.img-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+}
+
+.img-placeholder {
+    display: grid;
+    place-items: center;
+    background-color: var(--bg-surface);
+    color: var(--text-muted);
+}
+
+
 #botonesAcciones{
-    margin: 25px;
-    padding: 85px;
-    display: flex;              
-    flex-direction: column;    
-    justify-content: left;    
-    align-items: center;       
-    flex-wrap: wrap;         
-    gap: 10px;    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 12px;
+    padding: 24px;
     background-color: var(--color-amber);
     border-radius: 15px;
 }
 
-#boton-guardar {
+#botonesAcciones h2 { margin: 0 0 4px; text-align: center; }
+
+#botonesAcciones form { margin: 0; }
+
+
+#boton-guardar,
+#boton-like {
+    width: 100%;
     padding: 12px 24px;
-    width: 250px;
-    background-color: var(--color-primary);
-    border: none;
-    color: var(--bg-surface);
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 180ms;
+}
+
+#boton-guardar {
+    background-color: var(--color-primary);
+    border: none;
+    color: var(--bg-surface);
 }
 #boton-guardar:hover {
     background-color: var(--color-primary-hover);
 }
 
+
 #boton-like {
     background-color: var(--bg-surface);
     color: var(--color-primary);
     border: 1px solid var(--color-primary);
-    padding: 12px 24px;
-    width: 250px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 180ms;
 }
-
 #boton-like:hover {
     background-color: var(--color-primary-soft);
 }
-#event-img {
-    flex: 0 0 55%;
+
+
+#seccionMiniInfo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
 }
 
-#event-img img {
-    width: 100%;
-    display: block;
-    border-radius: 10px;
-    text-align: center;
-}
-
-#seccionMiniInfo{
-    display: flex;              /* activa flexbox */
-    flex-direction: row;        /* dirección del eje principal */
-    justify-content: left;    /* alinea en el eje principal */
-    align-items: center;        /* alinea en el eje transversal */
-    flex-wrap: wrap;            /* permite que bajen a otra línea */
-    gap: 10px;  
-}
-
-#cupo {
-    margin: 20px;
+#fecha, #dias, #cupo, #costo, #ubicacion {
     background-color: var(--bg-page);
-    padding: 24px;
+    padding: 20px;
     border-radius: 10px;
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
-#costo {
-    margin: 20px;
-    background-color: var(--bg-page);
-    padding: 24px 80px;
-    border-radius: 10px;
-}
+#ubicacion { margin-bottom: 16px; }
 
-#fecha{
-    margin: 20px;
-    background-color: var(--bg-page);
-    padding: 24px 80px;
-    border-radius: 10px;
-}
-
-#dias{
-    margin: 20px;
-    background-color: var(--bg-page);
-    padding: 24px 80px;
-    border-radius: 10px;
-}
-
-#ubicacion{
-    margin: 20px;
-    background-color: var(--bg-page);
-    padding: 24px 80px;
-    border-radius: 10px;
-}
-
-#seccionDescripcion{
-    margin: 20px;
-    padding: 24px 80px;
+#seccionDescripcion {
+    padding: 20px;
     background-color: var(--color-primary);
-    padding: 15px;
     color: aliceblue;
     border-radius: 10px;
+    overflow-wrap: anywhere;
 }
 
 
@@ -163,63 +141,6 @@ body{
 
 
 
-@media (max-width: 768px) {
-
-    #panelGeneralEvento {
-        margin: 0;
-    }
-
-    #panelTitulo {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    }
-    
-    #panelCategoria {
-    gap: 8px;
-    padding: 8px 14px;
-    margin-bottom: 15px;
-    width: fit-content;   /* que la etiqueta no ocupe todo el ancho */
-    max-width: 100%;
-    }
-
-    #panelCategoria h4,
-    #panelCategoria p {
-    margin: 0;
-    }
-
-    #tituloEimagen {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    #event-img {
-        flex: 1 1 auto;
-        width: 100%;
-    }
-
-    #botonesAcciones {
-        margin: 0;
-        padding: 20px;
-        align-items: stretch;
-    }
-
-    #boton-guardar,
-    #boton-like {
-        width: 100%;
-    }
-
-    #seccionMiniInfo {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    #cupo,
-    #costo,
-    #fecha,
-    #dias,
-    #ubicacion {
-        margin: 10px 0;
-        padding: 16px;
-    }
+@media (max-width: 800px) {
+    #tituloEimagen { grid-template-columns: 1fr; }
 }

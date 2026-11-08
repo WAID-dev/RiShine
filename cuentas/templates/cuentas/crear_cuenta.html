@@ -101,7 +101,7 @@
                 <p class="text-sm campo__error" id="error-correo" {% if not errores.correo %}hidden{% endif %}>{{ errores.correo }}</p>
             </div>
 
-            {#  Fecha de nacimiento  #}
+            {# Fecha de nacimiento #}
             <div class="campo">
                 <label class="ui-label campo__etiqueta" for="fecha_nacimiento">Fecha de nacimiento</label>
                 <input class="campo__control{% if errores.fecha_nacimiento %} is-invalid{% endif %}"
@@ -112,6 +112,18 @@
                        aria-describedby="ayuda-fecha_nacimiento error-fecha_nacimiento">
                 <p class="text-sm campo__ayuda" id="ayuda-fecha_nacimiento">Rishine es para jóvenes de 15 a 29 años.</p>
                 <p class="text-sm campo__error" id="error-fecha_nacimiento" {% if not errores.fecha_nacimiento %}hidden{% endif %}>{{ errores.fecha_nacimiento }}</p>
+            </div>
+
+            {# Ciudad #}
+            <div class="campo">
+                <label class="ui-label campo__etiqueta" for="ciudad">Ciudad</label>
+                <input class="campo__control{% if errores.ciudad %} is-invalid{% endif %}"
+                    type="text" id="ciudad" name="ciudad" maxlength="50"
+                    value="{{ valores.ciudad|default:'' }}"
+                    placeholder="Ej. Guadalajara" autocomplete="address-level2" required
+                    {% if errores.ciudad %}aria-invalid="true"{% endif %}
+                    aria-describedby="error-ciudad">
+                <p class="text-sm campo__error" id="error-ciudad" {% if not errores.ciudad %}hidden{% endif %}>{{ errores.ciudad }}</p>
             </div>
 
             {#  Contraseñas: dos columnas desde tableta  #}

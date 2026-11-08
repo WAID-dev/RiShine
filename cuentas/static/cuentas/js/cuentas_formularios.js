@@ -96,6 +96,9 @@
             }
             return '';
         },
+        ciudad: function (v) {
+          return v.trim() ? '' : 'Escribe tu ciudad.';
+        },
         contrasena: function (v) {
             if (!v) { return 'Crea una contraseña.'; }
             return v.length >= MIN_CONTRASENA

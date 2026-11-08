@@ -101,6 +101,13 @@ class RegistroUsuarioForm(RegistroBaseForm):
             'invalid': 'Escribe una fecha válida.',
         },
     )
+    ciudad = forms.CharField(
+        max_length=50,
+        error_messages={
+            'required': 'Escribe tu ciudad.',
+            'max_length': 'Usa hasta 50 caracteres.',
+        },
+    )
 
     def clean_fecha_nacimiento(self):
         nacimiento = self.cleaned_data['fecha_nacimiento']

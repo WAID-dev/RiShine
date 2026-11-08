@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}{% if evento %}{{ evento.titulo }}{% else %}Ver evento{% endif %}{% endblock %}
+{% block title %}{% if evento %}{{ evento.nombre_evento }}{% else %}Ver evento{% endif %}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'ver_evento/css/ver_evento.css' %}">
@@ -32,12 +32,11 @@
 
         <section id="tituloEimagen">
             <div id="event-img">
-                <!--
                 {% if evento and evento.imagen %}
-                <img src="{{ evento.imagen.url }}" alt="{{ evento.titulo }}" style="max-width: 100%; border-radius: 10px;">
+                    <img src="{{ evento.imagen.url }}" alt="{{ evento.titulo }}">
+                {% else %}
+                    <div class="img-placeholder">Sin imagen</div>
                 {% endif %}
-                -->
-                <img src="https://www.cetys.mx/educon/wp-content/uploads/2021/04/Evento-corporativo-1280x720-1.jpg">
             </div>
         
             <section id="botonesAcciones">

@@ -14,7 +14,7 @@ User = get_user_model()
 
 # Campos que se devuelven a la plantilla para no perderlos si hay un error.
 # Las contraseñas nunca se devuelven.
-CAMPOS_USUARIO = ('nombre', 'apellidos', 'username', 'correo', 'fecha_nacimiento')
+CAMPOS_USUARIO = ('nombre', 'apellidos', 'username', 'correo', 'fecha_nacimiento', 'ciudad')
 CAMPOS_PROMOTOR = ('nombre', 'apellidos', 'username', 'correo', 'organizacion')
 
 USUARIO_REPETIDO = 'Ese nombre de usuario ya está en uso. Prueba con otro.'
@@ -74,6 +74,7 @@ def registro_vista(request):
                         first_name=datos['nombre'],
                         last_name=datos['apellidos'],
                         fecha_de_nacimiento=datos.get('fecha_nacimiento'),
+                        ciudad=datos['ciudad'],
                     )
             except IntegrityError:
                 errores = {'username': USUARIO_REPETIDO}
